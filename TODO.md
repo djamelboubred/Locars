@@ -3,11 +3,20 @@
 # to be done 
 
 - [ ] HTML structure
+    - [ ] Base
+        - [ ] Became Host
+        - [ ] NavBar
+            - [ ] Login
+            - [ ] Add cars
+            - [ ] Help
+            - [ ] Tools for Host
+            - [ ] Became Host
     - [ ] Home
     - [ ] Login
     - [ ] Help
     - [ ] Cars
     - [ ] Account
+    - [ ] Became Host
         - [ ] my cars
         etc.
     
@@ -21,6 +30,7 @@
     - [ ] search in home 
     - [ ] Login
     - [ ] add cars
+    - [ ] Became Host
 
 - [ ] Database
     - [ ] Pattern search
