@@ -13,3 +13,7 @@ def Home(request: HttpRequest):
     :return: The Home
     """
     return render(request, 'listings/Home.html')
+
+def Login(request: HttpRequest):
+
+    return render(request, 'listings/Login.html')
