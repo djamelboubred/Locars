@@ -10,7 +10,8 @@
             - [X] Function click
             - [ ] Icons
             - [ ] Link page
-                - [ ] Login
+                - [X] Login
+                    - [X] Register
                 - [ ] Add cars
                 - [ ] Help
                 - [ ] Tools for Host
@@ -23,6 +24,7 @@
             - [ ] About
     - [ ] Home
     - [ ] Login
+    - [ ] Register
     - [ ] Help -> FEFE
     - [ ] Cars
     - [ ] Account
@@ -33,6 +35,7 @@
 - [ ] Link between pages
     - [ ] Home
     - [ ] Login
+    - [ ] Register
     - [ ] Help
     - [ ] Cars
 
@@ -42,6 +45,11 @@
     - [ ] add cars
     - [ ] Became Host
 
+- [ ] Class/model
+    - [ ] User
+    - [ ] Login
+    - [ ] Cars
+    - [ ] Comment
 - [ ] Database
     - [ ] Pattern search
     - [ ] Filters
