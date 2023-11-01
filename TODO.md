@@ -3,17 +3,27 @@
 # to be done 
 
 - [ ] HTML structure
-    - [ ] Base
+    - [ ] Base -> DJAMS
         - [ ] Became Host
         - [ ] NavBar
-            - [ ] Login
-            - [ ] Add cars
+            - [X] Structure
+            - [X] Function click
+            - [ ] Icons
+            - [ ] Link page
+                - [ ] Login
+                - [ ] Add cars
+                - [ ] Help
+                - [ ] Tools for Host
+                - [ ] Became Host
+        - [ ] Footer
+            - [ ] Contact
             - [ ] Help
-            - [ ] Tools for Host
-            - [ ] Became Host
+            - [ ] Logo
+            - [ ] Vehicule type
+            - [ ] About
     - [ ] Home
     - [ ] Login
-    - [ ] Help
+    - [ ] Help -> FEFE
     - [ ] Cars
     - [ ] Account
     - [ ] Became Host
