@@ -1,0 +1,16 @@
+{% extends 'listings/Base.html' %}
+{% block content %}
+<body>
+
+    <div class="connect">
+        <p>{{ message }}</p>
+        <form method="post">
+            <div class="username">
+                {{ form.as_p }}
+            </div>
+            {% csrf_token %}
+            <button type="submit" class="btn button-connect">Se connecter</button>
+        </form>
+    </div>
+</body>  
+{% endblock content %}

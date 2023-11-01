@@ -1,19 +1,19 @@
 * {
-    margin: 0;
-    padding: 0;
     text-decoration: none;
     list-style: none;
 }
 
 body {
-    background-color: red;
+    top: 500px;
+    background-color: rgb(175, 172, 172);
 }
 
 /* Header */
 
 .header {
+    top: 0;
     width: 100%;
-    position: absolute;
+    
     display: flex;
     background-color: aquamarine;
 }
@@ -70,4 +70,23 @@ body {
 .custom-button {
     background-color: rgb(173, 171, 171);
     color: white; /
+}
+
+.button-connect {
+    background-color: aliceblues;
+}
+
+/* Connection */
+
+.connect {
+    border-radius: 10px;
+    background-color: rgba(214, 210, 210, 0.747);
+    width: 30%;
+    margin-left: 150px;
+    margin-top: 100px;
+    padding: 10px;
+}
+
+.connect .username {
+    margin-left: 15px;
 }
