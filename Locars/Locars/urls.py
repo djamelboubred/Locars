@@ -25,4 +25,5 @@ urlpatterns = [
 urlpatterns.extend([
     path('', views.Home, name='Home'),
     path('login/', views.Login_page, name='Login_page'),
+    path('register/', views.Register_page, name='Register_page'),
 ])

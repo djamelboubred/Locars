@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpRequest, JsonResponse
 from . import forms
 from django.contrib.auth import login, authenticate # import des fonctions login et authenticate
+from .forms import UserRegistrationForm
 
 
 def Home(request: HttpRequest):
@@ -13,6 +14,12 @@ def Home(request: HttpRequest):
     :return: The Home
     """
     return render(request, 'listings/Home.html')
+
+def Register_page(request: HttpRequest):
+    form = forms.UserRegistrationForm()
+    if request.method == 'POST':
+        form = forms.UserRegistrationForm(request.POST) 
+    return render(request, 'listings/Register.html', context={'form':form})
 
 def Login_page(request):
     form = forms.LoginForm()
@@ -30,3 +37,6 @@ def Login_page(request):
             else:
                 message = 'Identifiants invalides.'
     return render(request, 'listings/Login.html', context={'form': form, 'message': message})
+
+
+
