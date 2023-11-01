@@ -13,13 +13,12 @@ body {
 .header {
     top: 0;
     width: 100%;
-    
     display: flex;
-    background-color: aquamarine;
+    background-color: rgb(93, 182, 152);
 }
 .Logo {
     font-size: 60px;
-    color: white;
+    color: rgb(0, 0, 0);
     margin-left: 50px;
 }
 
@@ -28,8 +27,7 @@ body {
 .navbar {
     top: 10px;
     right: 10px;
-    position: absolute;
-
+    position: absolute;   
 }
 
 #list {
@@ -67,9 +65,12 @@ body {
 
 /* Button */
 
-.custom-button {
-    background-color: rgb(173, 171, 171);
-    color: white; /
+.custom-button { /* bouton navbar*/
+    background-color: rgb(209, 207, 207);
+    color: rgb(0, 0, 0);
+}
+.custom-button:hover{
+    background-color: rgba(214, 210, 210, 0.747);
 }
 
 .button-connect {
@@ -78,15 +79,28 @@ body {
 
 /* Connection */
 
-.connect {
+.signin {
     border-radius: 10px;
     background-color: rgba(214, 210, 210, 0.747);
-    width: 30%;
-    margin-left: 150px;
+    width: 50%;
+    margin-left: 450px;
     margin-top: 100px;
     padding: 10px;
 }
 
-.connect .username {
+.signin h1 {
+    margin-left: 300px;
+}
+
+.signin .username {
     margin-left: 15px;
+}
+
+.form {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }

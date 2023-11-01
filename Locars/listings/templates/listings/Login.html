@@ -2,15 +2,22 @@
 {% block content %}
 <body>
 
-    <div class="connect">
+    <div class="signin">
+        <h1>Connection</h1>
         <p>{{ message }}</p>
-        <form method="post">
+        <form method="post" class="form">
             <div class="username">
                 {{ form.as_p }}
             </div>
             {% csrf_token %}
             <button type="submit" class="btn button-connect">Se connecter</button>
         </form>
+    </div>
+
+    <div class="Signup">
+        <span>Créer un compte</span>
+        <a href="Account.html"> S'inscrire </a>
+    
     </div>
 </body>  
 {% endblock content %}
