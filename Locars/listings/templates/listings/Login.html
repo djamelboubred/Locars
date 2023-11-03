@@ -1,7 +1,29 @@
 {% extends 'listings/Base.html' %}
 {% block content %}
 <body>
+    <h3>Se Connecter</h3>
+    
+    {% for message in messages %}
 
+    <strong>{{ message }}</strong>
+
+    {% endfor %}
+
+    <form method="post" action="">
+        {% csrf_token %}
+        <label for="username">Nom d'utilisateur</label>
+        <input type="text" id="username" name="username" placeholder="Enter your Username" required>
+        <br>
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" name="password" placeholder="Enter your Password" required>
+        <br>
+
+        <button type="submit" class="btn button-connect">Se connecter</button>
+        
+
+
+
+<!--
     <div class="signin">
         <h1>Connection</h1>
         <p>{{ message }}</p>
@@ -16,8 +38,10 @@
 
     <div class="Signup">
         <span>Créer un compte</span>
-        <a href="{% url 'Register_page' %}"> S'inscrire </a>
+        <a href="{% url 'Register' %}"> S'inscrire </a>
     
     </div>
+-->
+
 </body>  
 {% endblock content %}

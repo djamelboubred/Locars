@@ -1,6 +1,53 @@
 {% extends 'listings/Base.html' %}
 {% block content %}
+
+
 <body>
+    <h3>Créer un compte</h3>
+
+    {% for message in messages %}
+
+    <strong>{{ message }}</strong>
+
+    {% endfor %}
+
+    <form method="post" action="">
+        {% csrf_token %}
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="jean.lafaille@locairs.com" required>
+        <br>
+        <br>
+        <label for="firstname">Prénom</label>
+        <input type="text" id="firstname" name="firstname" placeholder="Jean" required>
+        <br>
+        <br>
+        <label for="lastname">Nom de famille</label>
+        <input type="text" id="lastname" name="lastname" placeholder="Lafaille" required>
+        <br>
+        <br>
+        <label for="username">Nom d'utilisateur</label>
+        <input type="text" id="username" name="username" placeholder="Enter your Username" required>
+        <br>
+        <br>
+        <label for="phone_no">Numéro de téléphone</label>
+        <input type="text" id="phone_no" name="phone_no" placeholder="0652854879" required>
+        <br>
+        <br>
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" name="password" placeholder="Enter your Password" required>
+        <br>
+        <br>
+        <label for="password1">Mot de passe</label>
+        <input type="password" id="password1" name="password1" placeholder="Confirm your Password" required>
+
+        <button type="submit" class="btn button-connect">Se connecter</button>
+    </form>
+</body>
+
+
+
+
+<!--<body>
     <div class="signin">
     <form action="" method="post" class="form">
         <div class="username">
@@ -8,10 +55,10 @@
         </div>
             {% csrf_token %}
             <br>
-            <input type="submit" value="Envoyer" class="button-connect">
+            <input type="submit" value="S'inscrire" class="button-connect">
     </form>
     
 
 </div>
-</body>  
+</body>  -->
 {% endblock content %}
