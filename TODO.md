@@ -23,8 +23,8 @@
             - [ ] Vehicule type
             - [ ] About
     - [ ] Home
-    - [ ] Login
-    - [ ] Register
+    - [ ] Login -> Djams
+    - [ ] Register -> Djams
     - [ ] Help -> FEFE
     - [ ] Cars
     - [ ] Account
@@ -42,6 +42,16 @@
 - [ ] Function
     - [ ] search in home 
     - [ ] Login
+        - [ ] verify information => with JavaScript
+        - [ ] redirect client in Account or Connection Pages after Connect
+        - [ ] Send mail with gmail protocole
+            - [ ] use no reply mail adress
+        - [ ] if user register authentificate pass connection page
+        - [ ] Use email or username for connection
+        - [ ] Create link for verify your account
+        - [X] create superUser
+            - [X] username => djams
+            - [X] password => dianes
     - [ ] add cars
     - [ ] Became Host
 
