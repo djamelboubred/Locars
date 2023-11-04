@@ -10,8 +10,21 @@
             - [X] Function click
             - [ ] Icons
             - [ ] Link page
-                - [X] Login
-                    - [X] Register
+                - [X] Login -> Djams
+                    - [X] Register -> Djams
+                    - [X] Logout -> Djams
+                - [ ] Profile
+                    - [ ] Shows profile picture
+                    - [ ]
+                    - [ ] Account
+                        - [ ] Dell user
+                        - [ ] Modify information of user
+                    
+                    - [ ] Favories
+                    - [ ] Travel
+                    - [ ] Became Locarist
+                        - [ ] if user.locarist == False
+                        - [ ] else: no print this part
                 - [ ] Add cars
                 - [ ] Help
                 - [ ] Tools for Host
@@ -49,7 +62,7 @@
         - [ ] if user register authentificate pass connection page
         - [ ] Use email or username for connection
         - [ ] Create link for verify your account
-        - [X] create superUser
+        - [X] create superUser -> Djams
             - [X] username => djams
             - [X] password => dianes
     - [ ] add cars
@@ -57,6 +70,9 @@
 
 - [ ] Class/model
     - [ ] User
+        - [ ] Travel
+        - [ ] Favories
+        - [ ] Locarist == False (DEFAULT)
     - [ ] Login
     - [ ] Cars
     - [ ] Comment
