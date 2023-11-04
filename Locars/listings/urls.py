@@ -8,4 +8,10 @@ urlpatterns = [
     path('register/', views.Register, name='Register'),
     path('login/', views.Login, name='Login'),
     path('logout/', views.Logout, name='Logout'),
+    path('profile/', views.Profile, name='Profile'),
+    path('account', views.Account, name='Account'),
+    path('locarist/', views.Locarist, name='Locarist'),
+    path('favories/', views.Favories, name='Favories'),
+    path('travel/', views.Travel, name='Travel'),
+
 ]

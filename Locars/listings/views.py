@@ -4,6 +4,8 @@ from . import forms
 from django.contrib.auth import login, authenticate, logout# import des fonctions login et authenticate
 from django.contrib.auth.models import User
 from django.contrib import messages
+from Locars import settings
+from django.core.mail import send_mail
 
 #from .forms import UserRegistrationForm
 #from .models import CustomUserManager
@@ -11,7 +13,7 @@ from django.contrib import messages
 
 def Home(request: HttpRequest):
     """
-    The home function renders the home page of the LADN website.
+    The home function renders the home page of the Locars website.
     
     
     :param request: HttpRequest: Pass the request from the server to the function
@@ -52,6 +54,16 @@ def Register(request):
         my_user.phone_no = phone_no
         my_user.save()
         messages.success(request, 'Votre compte à été créer avec succès')
+        
+        """
+        Send email after create User for the first time
+        """
+        subject = "Bienvenue sur Locars"
+        message = "Bienvenue" + my_user.first_name + " " + my_user.last_name + "\n Nous sommesheureux de vous compter aprmis nous \n\n\n Merci\n"
+        from_email = settings.EMAIL_HOST_USER
+        to_list = [my_user.email]
+        send_mail(subject, message, from_email, to_list, fail_silently=False)
+        
         return redirect('Login')
 
     return render(request, 'listings/Register.html')
@@ -75,52 +87,57 @@ def Logout(request):
     messages.success(request, 'Vous avez été déconnecté')
     return redirect('Home')
 
-
-
-"""def Register_page(request):
-    if request.method == 'POST':
-        form = UserRegistrationForm(request.POST)
-        if form.is_valid():
-            user = form.save()  # Enregistrez l'utilisateur
-            # Connectez automatiquement l'utilisateur après l'enregistrement
-            login(request, user)
-            return redirect("{% url 'Home' %}")  # Redirigez l'utilisateur vers une page de succès ou d'accueil
-
-    else:
-        form = UserRegistrationForm()
-
-    return render(request, 'listings/Register.html', {'form': form})
-"""
-"""
-def Register_page(request):
-    if request.method == 'POST':
-        email = request.POST['email']
-        username = request.POST['username']
-        phone_no = request.POST['phone_no']
+def Profile(request: HttpRequest):
+    """
+    The Profile function renders the Profile page of the Locars website.
     
-        user = CustomUser(email = email, username = username, phone_no = phone_no)
-        user.save()  # Enregistrez l'objet dans la base de données
-        return redirect("{% url 'Home' %}")  # Redirigez vers une autre vue après l'enregistrement
+    - shows informations
 
-    return render(request, 'listings/Register.html')
+    :param request: HttpRequest: Pass the request from the server to the function
+    :return: The Profile
+    """
+    return render(request, 'listings/Profile.html')
 
+def Account(request: HttpRequest):
+    """
+    The Profile function renders the Account page of the Locars website.
 
-def Login_page(request):
-    form = forms.LoginForm()
-    message= ''
-    if request.method == 'POST':
-        form = forms.LoginForm(request.POST)
-        if form.is_valid():
-            user = authenticate(
-                username=form.cleaned_data['username'],
-                password=form.cleaned_data['password'],
-            )
-            if user is not None:
-                login(request, user)
-                message = f'Bonjour, {user.username}! Vous êtes connecté.'
-            else:
-                message = 'Identifiants invalides.'
-    return render(request, 'listings/Login.html', context={'form': form, 'message': message})
+    - user can modify their informations and password? 
+    
+    :param request: HttpRequest: Pass the request from the server to the function
+    :return: The Account
+    """
+    return render(request, 'listingsAccount.html')
 
+def Locarist(request: HttpRequest):
+    """
+    The Profile function renders the Locarist page of the Locars website.
+    
+    - this views register a user like a locarist, use formularies for register informations
 
-"""
+    :param request: HttpRequest: Pass the request from the server to the function
+    :return: The Locarist
+    """
+    return render(request, 'listings/Locarist.html')
+
+def Favories(request: HttpRequest):
+    """
+    The Profile function renders the Favories page of the Locars website.
+    
+    - show favories of user
+
+    :param request: HttpRequest: Pass the request from the server to the function
+    :return: The Profile
+    """
+    return render(request, 'listings/Favories.html')
+
+def Travel(request: HttpRequest):
+    """
+    The Profile function renders the Travel page of the Locars website.
+    
+    - show travel of user
+    
+    :param request: HttpRequest: Pass the request from the server to the function
+    :return: The Profile
+    """
+    return render(request, 'listings/Travel.html')
