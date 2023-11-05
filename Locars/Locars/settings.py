@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 from . info import *
+import os
 
 EMAIL_USER_TLS = EMAIL_USER_TLS
 EMAIL_HOST = EMAIL_HOST
@@ -130,5 +131,11 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#AUTH_USER_MODEL = 'listings.User'
 APPEND_SLASH=False
+
+AUTH_USER_MODEL = 'listings.User'
+
+STATIC_URL = "/static/"
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

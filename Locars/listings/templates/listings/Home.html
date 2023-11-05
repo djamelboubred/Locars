@@ -1,4 +1,4 @@
-{% extends 'listings/Base.html' %}
+{% extends 'Base.html' %}
 {% load static %}
 {% block content %}
 
@@ -10,6 +10,11 @@
 
 {% if user.is_authenticated %}
 <h3> Bonjour {{ user.username }} bienvenu sur Locars</h3>
+voici votre numéro de téléphone {{ user.phone_no }}
+<br>
+{{ user.first_name }}
+<br>
+{{ user.last_name }}
 <button type="submit"><a href="logout">Déconnection</a></button>
 {% else %}
 <button type="submit"><a href="register">S'enregistrer</a></button>

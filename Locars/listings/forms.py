@@ -1,4 +1,17 @@
 from django import forms
+from .models import User, Car
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        
+        model = User
+        
+        fields = ('username', 'email', 'first_name', 'last_name', 'phone_no', 'password')
+
+class CarForm(forms.ModelForm):
+    class Meta:
+        model = Car
+        fields = ['marque', 'model', 'year', 'fuel']
 """
 from django.contrib.auth.forms import UserCreationForm
 from .models import CustomUserManager

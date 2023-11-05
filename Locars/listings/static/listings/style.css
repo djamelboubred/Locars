@@ -113,3 +113,46 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+
+
+/*Profile nav bar */
+/* lien active */
+
+.active {
+    background-color: red; /* Fond rouge pour le lien actif */
+    color: white; /* Texte blanc pour le lien actif */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.image-ronde {
+    border-radius: 50%; /* Utilisez 50% pour obtenir une forme circulaire */
+    width: 200px; /* Ajustez la largeur au besoin */
+    height: 200px; /* Ajustez la hauteur au besoin */
+}
+
+.navProfile {
+    width: 300px;
+    background-color: cadetblue;
+    height: 100vh;
+    float:left;
+}
+
+.navProfile li a {
+    color: black;
+    text-decoration: none;
+    font-size: 20px;
+    margin-left: 10px;
+
+ }
+
+.ProfilBarDeconnect {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.BaseProfileContent {
+    margin: 310px;
+    height: 100%;
+}

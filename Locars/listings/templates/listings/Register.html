@@ -1,4 +1,4 @@
-{% extends 'listings/Base.html' %}
+{% extends 'Base.html' %}
 {% block content %}
 
 
@@ -18,11 +18,11 @@
         <br>
         <br>
         <label for="firstname">Prénom</label>
-        <input type="text" id="firstname" name="firstname" placeholder="Jean" required>
+        <input type="text" id="first_name" name="first_name" placeholder="Jean" required>
         <br>
         <br>
         <label for="lastname">Nom de famille</label>
-        <input type="text" id="lastname" name="lastname" placeholder="Lafaille" required>
+        <input type="text" id="last_name" name="last_name" placeholder="Lafaille" required>
         <br>
         <br>
         <label for="username">Nom d'utilisateur</label>
@@ -37,7 +37,7 @@
         <input type="password" id="password" name="password" placeholder="Enter your Password" required>
         <br>
         <br>
-        <label for="password1">Mot de passe</label>
+        <label for="password1">Confirmer</label>
         <input type="password" id="password1" name="password1" placeholder="Confirm your Password" required>
 
         <button type="submit" class="btn button-connect">Se connecter</button>

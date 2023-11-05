@@ -13,5 +13,6 @@ urlpatterns = [
     path('locarist/', views.Locarist, name='Locarist'),
     path('favories/', views.Favories, name='Favories'),
     path('travel/', views.Travel, name='Travel'),
+    path('mycars/', views.MyCars, name='MyCars'),
 
 ]
