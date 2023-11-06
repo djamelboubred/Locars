@@ -9,6 +9,7 @@ from Locars import settings
 from django.core.mail import send_mail
 from .forms import UserForm
 from .models import User, Car
+from django.utils import timezone
 
 #from .forms import UserRegistrationForm
 #from .models import CustomUserManager
@@ -41,6 +42,7 @@ def Register(request):
             user.first_name = first_name
             user.last_name = last_name
             user.phone_no = phone_no
+            user.date_creation = timezone.now()
             user.save()
             
             login(request, user)  # Connectez l'utilisateur immédiatement après la création du compte
@@ -106,13 +108,13 @@ def Login(request):
         return redirect('Profile')
     else:
         if request.method == "POST":
-            username = request.POST['username']
+            email = request.POST['email']
             password = request.POST['password']
-            user = authenticate(username=username, password=password)
+            user = authenticate(username=email, password=password)
             if user is not None:
                 login(request, user)
                 username = user.username
-                return render(request, 'listings/Home.html', {'username': username})
+                return render(request, 'listings/Profile.html', {'username': username})
             else:
                 messages.error(request, 'Mauvaise authentification')
                 return redirect('Login')

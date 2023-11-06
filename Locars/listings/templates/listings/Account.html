@@ -1,6 +1,7 @@
-{% extends 'Base.html' %}
+{% extends 'listings/BaseProfile.html' %}
+{% load static %}
 {% block content %}
-<body>
-    
-</body>  
-{% endblock content %}
+
+    <h3> Bonjour {{ user.username }} bienvenue sur votre profile</h3>
+
+{% endblock %}

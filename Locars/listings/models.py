@@ -39,6 +39,11 @@ class User(AbstractBaseUser, PermissionsMixin):
                                 default='profile_picture/default_images/profile_default.jpg')
     locarist = models.BooleanField(default=False)
 
+    date_creation = models.DateTimeField(auto_now_add=True)
+
+    def get_creation_month_year(self):
+        return self.date_creation.strftime('%b %Y')
+
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 

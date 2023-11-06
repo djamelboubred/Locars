@@ -1,7 +1,16 @@
 {% extends 'listings/BaseProfile.html' %}
 {% load static %}
 {% block content %}
-
-    <h3> Bonjour {{ user.username }} bienvenue sur votre profile</h3>
-
+    <div class="ProfilePage">
+        <h1>
+            Mon Profil
+        </h1>
+        Membre depuis : {{ user.date_creation | date:"M Y" }}
+        
+        <br>
+        
+        {{ user.first_name }}
+        {{ user.last_name}}
+        <!--{{ user.nb_voyage }}-->
+    </div>
 {% endblock %}
