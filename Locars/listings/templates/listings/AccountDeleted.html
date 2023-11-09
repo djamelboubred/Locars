@@ -1,0 +1,17 @@
+{% load static %}
+{% extends 'Base.html' %}
+{% block content %}
+
+    <h1> Votre compte à été supprimer avec succès.</h1>
+
+    <p>Vous allez être rediriger vers la page d'acceuil</p>
+
+    <!-- Ajoutez le script JavaScript pour la redirection -->
+    <script>
+        setTimeout(function() {
+            // Redirection après 5 secondes
+            window.location.href = "{% url 'Home' %}";
+        }, 3000);  // 5000 millisecondes = 5 secondes
+    </script>
+
+</endblock>

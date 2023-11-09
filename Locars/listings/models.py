@@ -37,7 +37,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     phone_no = models.CharField(max_length=15, blank=True)
     profilePicture = models.ImageField(upload_to='profile_picture/',
                                 default='profile_picture/default_images/profile_default.jpg')
+    #Indique si l'utilisateur est déjà un hôte (default = NON)
     locarist = models.BooleanField(default=False)
+
+    #adresse ded l'utilisateur
+    country = models.CharField(max_length=42, blank=True)
+    city = models.CharField(max_length=58, blank=True)
+    street = models.CharField(max_length=50, blank=True)
 
     date_creation = models.DateTimeField(auto_now_add=True)
 
