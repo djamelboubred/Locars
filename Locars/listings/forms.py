@@ -12,6 +12,12 @@ class CarForm(forms.ModelForm):
     class Meta:
         model = Car
         fields = ['marque', 'model', 'year', 'fuel']
+
+class ProfilForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['profilePicture', 'first_name', 'last_name']
+
 """
 from django.contrib.auth.forms import UserCreationForm
 from .models import CustomUserManager

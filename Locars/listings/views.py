@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from Locars import settings
 from django.core.mail import send_mail
-from .forms import UserForm
+from .forms import UserForm, ProfilForm
 from .models import User, Car
 from django.utils import timezone
 
@@ -54,55 +54,6 @@ def Register(request):
 
     return render(request, 'listings/Register.html')
 
-"""
-def Register(request):
-
-    if request.method == "POST":
-        username = request.POST['username']
-        firstname = request.POST['firstname']
-        lastname = request.POST['lastname']
-        email = request.POST['email']
-        phone_no = request.POST['phone_no']
-        password = request.POST['password']
-        password1 = request.POST['password1']
-        
-        if User.objects.filter(username=username):
-            messages.error(request, "Ce nom d'utilisateur est déjà pris")
-            return redirect('Register')
-
-        if User.objects.filter(email=email):
-            messages.error(request, "Cet email à déjà un comptes")
-            return redirect('Register')
-
-        if not username.isalnum():
-            messages.error(request, "Le nom d'utilisateur doit être alphanuméric")
-            return redirect('Register')
-
-        if password != password1:
-            messages.error(request, "Les deux mot de passe ne coincide pas !")
-            return redirect('Register')
-
-        my_user = User.objects.create_user(username, email, password)
-        my_user.first_name = firstname
-        my_user.last_name = lastname
-        my_user.phone_no = phone_no
-        my_user.save()
-        messages.success(request, 'Votre compte à été créer avec succès')
-"""        
-"""
-        Send email after create User for the first time
-        
-        subject = "Bienvenue sur Locars"
-        message = "Bienvenue" + my_user.first_name + " " + my_user.last_name + "\n Nous sommesheureux de vous compter aprmis nous \n\n\n Merci\n"
-        from_email = settings.EMAIL_HOST_USER
-        to_list = [my_user.email]
-        send_mail(subject, message, from_email, to_list, fail_silently=False)
-"""
-"""
-        return redirect('Login')
-
-    return render(request, 'listings/Register.html')
-"""
 def Login(request):
     if request.user.is_authenticated:
         return redirect('Profile')
@@ -127,15 +78,24 @@ def Logout(request):
 
 @login_required
 def Profile(request: HttpRequest):
-    """
-    The Profile function renders the Profile page of the Locars website.
-    
-    - shows informations
+    if request.method == 'POST':
+        form = ProfilForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            # Enregistrez les modifications de l'utilisateur
+            request.user.first_name = form.cleaned_data['first_name']
+            request.user.last_name = form.cleaned_data['last_name']
+            request.user.profilePicture = form.cleaned_data['profilePicture']
+            request.user.save()
 
-    :param request: HttpRequest: Pass the request from the server to the function
-    :return: The Profile
-    """
-    return render(request, 'listings/Profile.html')
+            # Enregistrez le formulaire
+            form.save()
+
+            return redirect('Profile')  # Redirigez l'utilisateur vers une autre page après la modification
+    else:
+        form = ProfilForm(instance=request.user)
+
+    return render(request, 'listings/Profile.html', {'form': form})
+
 
 @login_required
 def Account(request: HttpRequest):
@@ -148,6 +108,22 @@ def Account(request: HttpRequest):
     :return: The Account
     """
     return render(request, 'listings/Account.html')
+
+@login_required
+def DeleteAccount(request: HttpRequest):
+    if request.method == 'POST':
+        # Supprimer l'utilisateur
+        request.user.delete()
+        # Déconnecter l'utilisateur
+        logout(request)
+        # Rediriger vers une page d'accueil ou une page appropriée
+        return redirect('AccountDeleted')
+    return render(request, 'listings/DeleteAccount.html')
+
+def AccountDeleted(request: HttpRequest):
+
+    return render(request, 'listings/AccountDelete.html')
+
 
 def Locarist(request: HttpRequest):
     """

@@ -1,0 +1,14 @@
+{% extends 'listings/BaseProfile.html' %}
+{% load static %}
+{% block content %}
+
+
+    <h2>Supprimer le compte</h2>
+        <p>Êtes-vous sûr de vouloir supprimer votre compte ?</p>
+        <form method="post" action="">
+            {% csrf_token %}
+            <button type="submit">Supprimer le compte</button>
+        </form>
+            <button type="button" class="btn btn-secondary"><a href="{% url 'Account' %}">Annuler</a></button>
+
+{% endblock%}

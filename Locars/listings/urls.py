@@ -14,5 +14,6 @@ urlpatterns = [
     path('favories/', views.Favories, name='Favories'),
     path('travel/', views.Travel, name='Travel'),
     path('mycars/', views.MyCars, name='MyCars'),
-
+    path('deleteAccount/', views.DeleteAccount, name='DeleteAccount'),
+    path('accountDeleted/', views.AccountDeleted, name='AccountDeleted'),
 ]

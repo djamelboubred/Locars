@@ -67,6 +67,7 @@ class Car(models.Model):
     marque = models.CharField(max_length=50, default='')
     model = models.CharField(max_length=50, default='')
     year = models.PositiveIntegerField()
+    
 
     fuel = models.CharField(max_length=1, choices=FUEL_CHOICES)
     def __str__(self):
