@@ -13,19 +13,37 @@
                 - [X] Login -> Djams
                     - [X] Register -> Djams
                     - [X] Logout -> Djams
-                - [ ] Profile
-                    - [ ] Shows profile picture
-                    - [ ]
-                    - [ ] Account
-                        - [ ] Dell user
+                - [X] Profile
+                    - [X] Shows profile picture
+                    - [X] Modify information 
+                        - [X] First Name
+                        - [X] Last Name
+                        - [X] Profile Picture
+                    - [ ] Account 10/11
+                        - [X] Dell user
                         - [ ] Modify information of user
-                    
+                            - [ ] Adress
+                            - [ ] Identy
+                            - [ ] Mail
+                            - [ ] Phone number
+                            - [ ] RIB ?
+                    - [ ] Locarist
+                        - [ ] First cars
+                            - [ ] Adress
+                            - [ ] Immatriculate
+                            - [ ] Manual/automate
+                        - [ ] Add cars
+                            - [ ] Adress
+                            - [ ] Immatriculate
+                            - [ ] Manual/automate
                     - [ ] Favories
                     - [ ] Travel
                     - [ ] Became Locarist
                         - [ ] if user.locarist == False
                         - [ ] else: no print this part
-                - [ ] Add cars
+                    - [ ] Add cars
+                        - [ ] My Cars
+                        - [ ] Add Cars
                 - [ ] Help
                 - [ ] Tools for Host
                 - [ ] Became Host
@@ -36,8 +54,8 @@
             - [ ] Vehicule type
             - [ ] About
     - [ ] Home
-    - [ ] Login -> Djams
-    - [ ] Register -> Djams
+    - [X] Login -> Djams
+    - [X] Register -> Djams
     - [ ] Help -> FEFE
     - [ ] Cars
     - [ ] Account
@@ -71,6 +89,8 @@
 - [ ] Class/model
     - [ ] User
         - [ ] Travel
+            - [ ] nb Travel
+            - [ ] Travel Details
         - [ ] Favories
         - [ ] Locarist == False (DEFAULT)
     - [ ] Login
