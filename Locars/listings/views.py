@@ -5,13 +5,17 @@ from django.contrib.auth import login, authenticate, logout # import des fonctio
 from django.contrib.auth.decorators import login_required #import fonctions de gestions des authentifications pour les pages
 from django.contrib.auth.models import User
 from django.contrib import messages
-from Locars import settings
+
 from django.core.mail import send_mail
-from .forms import UserForm, ProfilForm, AccountForm
+from .forms import UserForm, ProfilForm, AccountForm, EmailForm
 from .models import User, Car
 from django.utils import timezone 
 from datetime import datetime
-from .utils import send_email_with_html_body
+#from .utils import send_email_with_html_body
+from django.conf import settings
+from decouple import config
+import smtplib
+from email.mime.text import MIMEText
 #from .forms import UserRegistrationForm
 #from .models import CustomUserManager
 
@@ -24,7 +28,61 @@ def Home(request: HttpRequest):
     :param request: HttpRequest: Pass the request from the server to the function
     :return: The Home
     """
-    return render(request, 'listings/Home.html')
+    """
+    ctx = {}
+    if request.method == 'POST': 
+        email = request.POST.get('email')
+        subjet = "Test Email"
+        template = 'listings/EmailSend.html'
+        context = {'date': datetime.today().date,
+                   'email': email
+                   }
+        receivers = [email]
+        has_send = send_email_with_html_body(subjet= subjet, 
+                                  receivers= receivers, 
+                                  template= template, 
+                                  context= context)
+        
+        if has_send:
+            ctx = {"msg":"mail envoyee avec success."}
+        else:
+            ctx = {"msg":"mail echouer."}
+        
+    return render(request, 'listings/Home.html', ctx)
+    #return render(request, 'listings/Home.html')
+"""
+    if request.method == 'POST':
+        form = EmailForm(request.POST)
+        if form.is_valid():
+            # Adresse e-mail du destinataire
+            to_email = form.cleaned_data['to_email']
+            # Création du message
+            subject = 'Activation du compte'
+            body = 'Bonjour bienvenue chez Locars'
+            message = MIMEText(body)
+            message['Subject'] = subject
+            message['From'] = settings.EMAIL_HOST_USER
+            message['To'] = to_email
+            # Envoi de l'e-mail
+            with smtplib.SMTP(settings.EMAIL_HOST, settings.EMAIL_PORT) as server:
+                server.starttls()  # Utilisez cette ligne si EMAIL_USE_TLS est True
+                server.login(settings.EMAIL_HOST_USER, settings.EMAIL_HOST_PASSWORD)
+                server.sendmail(settings.EMAIL_HOST_USER, [to_email], message.as_string())
+
+            return render(request, 'listings/Home.html', {'to_email': to_email})
+    else:
+        form = EmailForm()
+
+    return render(request, 'listings/Home.html', {'form': form})
+
+
+
+
+
+
+
+
+
 
 
 def Register(request):
@@ -117,26 +175,10 @@ def Account(request: HttpRequest):
             request.user.city = form.cleaned_data['city']
             request.user.street = form.cleaned_data['street']
             request.user.phone_no = form.cleaned_data['phone_no']
-            
-            email = request.user.email #request.POST.get('email')
-            subjet = "Test Email"
-            template = 'listings/Home.html'
-            context = {'date': datetime.today().date,
-                       'email': email
-                       }
-            receivers = [email]
-            has_send = send_email_with_html_body(subjet= subjet, 
-                                      receivers= receivers, 
-                                      template= template, 
-                                      context= context)
-            if has_send:
-                return render(request, 'listings/Home.html', {"msg":"mail envoyee avec success."})
-            
             request.user.save()
-
-            # Enregistrez le formulaire
+                       
+             # Enregistrez le formulaire
             form.save()
-
             return redirect('Account')  # Redirigez l'utilisateur vers une autre page après la modification
     else:
         form = ProfilForm(instance=request.user)
@@ -158,8 +200,7 @@ def AccountDeleted(request: HttpRequest):
     Auto fresh page in 3 seconds redirect in home page
     """
     return render(request, 'listings/AccountDelete.html')
-
-
+    
 def Locarist(request: HttpRequest):
     """
     The Profile function renders the Locarist page of the Locars website.

@@ -22,3 +22,8 @@ class AccountForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['email', 'country', 'city', 'street', 'phone_no']
+
+
+class EmailForm(forms.Form):
+    to_email = forms.EmailField(label='Destinataire')
+
