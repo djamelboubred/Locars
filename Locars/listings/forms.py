@@ -6,7 +6,7 @@ class UserForm(forms.ModelForm):
         
         model = User
         
-        fields = ('username', 'email', 'first_name', 'last_name', 'phone_no', 'password')
+        fields = ['username', 'email', 'first_name', 'last_name', 'phone_no', 'password']
 
 class CarForm(forms.ModelForm):
     class Meta:
@@ -18,20 +18,7 @@ class ProfilForm(forms.ModelForm):
         model = User
         fields = ['profilePicture', 'first_name', 'last_name']
 
-"""
-from django.contrib.auth.forms import UserCreationForm
-from .models import CustomUserManager
-
-class LoginForm(forms.Form):
-    username = forms.CharField(max_length=50, label='Nom d’utilisateur')
-    password = forms.CharField(max_length=50, min_length=8, widget=forms.PasswordInput, label='Mot de passe')
-"""
-"""
-class UserRegistrationForm(UserCreationForm):
-    email = forms.EmailField(required=True)
-
+class AccountForm(forms.ModelForm):
     class Meta:
-        model = User  # Utilisez le modèle d'utilisateur personnalisé importé
-        fields = ('email', 'username', 'password1', 'password2')
-
-"""
+        model = User
+        fields = ['email', 'country', 'city', 'street', 'phone_no']

@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from Locars import settings
 from django.core.mail import send_mail
-from .forms import UserForm, ProfilForm
+from .forms import UserForm, ProfilForm, AccountForm
 from .models import User, Car
 from django.utils import timezone
 
@@ -107,6 +107,23 @@ def Account(request: HttpRequest):
     :param request: HttpRequest: Pass the request from the server to the function
     :return: The Account
     """
+    if request.method == 'POST':
+        form = AccountForm(request.POST, instance=request.user)
+        if form.is_valid():
+            # Enregistrez les modifications de l'utilisateur
+            request.user.email = form.cleaned_data['email']
+            request.user.country = form.cleaned_data['country']
+            request.user.city = form.cleaned_data['city']
+            request.user.street = form.cleaned_data['street']
+            request.user.phone_no = form.cleaned_data['phone_no']
+            request.user.save()
+
+            # Enregistrez le formulaire
+            form.save()
+
+            return redirect('Account')  # Redirigez l'utilisateur vers une autre page après la modification
+    else:
+        form = ProfilForm(instance=request.user)
     return render(request, 'listings/Account.html')
 
 @login_required
@@ -121,7 +138,9 @@ def DeleteAccount(request: HttpRequest):
     return render(request, 'listings/DeleteAccount.html')
 
 def AccountDeleted(request: HttpRequest):
-
+    """
+    Auto fresh page in 3 seconds redirect in home page
+    """
     return render(request, 'listings/AccountDelete.html')
 
 
