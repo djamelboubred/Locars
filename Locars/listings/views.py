@@ -9,8 +9,9 @@ from Locars import settings
 from django.core.mail import send_mail
 from .forms import UserForm, ProfilForm, AccountForm
 from .models import User, Car
-from django.utils import timezone
-
+from django.utils import timezone 
+from datetime import datetime
+from .utils import send_email_with_html_body
 #from .forms import UserRegistrationForm
 #from .models import CustomUserManager
 
@@ -116,6 +117,21 @@ def Account(request: HttpRequest):
             request.user.city = form.cleaned_data['city']
             request.user.street = form.cleaned_data['street']
             request.user.phone_no = form.cleaned_data['phone_no']
+            
+            email = request.user.email #request.POST.get('email')
+            subjet = "Test Email"
+            template = 'listings/Home.html'
+            context = {'date': datetime.today().date,
+                       'email': email
+                       }
+            receivers = [email]
+            has_send = send_email_with_html_body(subjet= subjet, 
+                                      receivers= receivers, 
+                                      template= template, 
+                                      context= context)
+            if has_send:
+                return render(request, 'listings/Home.html', {"msg":"mail envoyee avec success."})
+            
             request.user.save()
 
             # Enregistrez le formulaire
@@ -153,6 +169,7 @@ def Locarist(request: HttpRequest):
     :param request: HttpRequest: Pass the request from the server to the function
     :return: The Locarist
     """
+
     return render(request, 'listings/Locarist.html')
 
 @login_required

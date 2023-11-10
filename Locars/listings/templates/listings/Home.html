@@ -5,8 +5,11 @@
 {% for message in messages %}
 
 <strong>{{ message }}</strong>
-
 {% endfor %}
+
+{% if msg %}
+    {{ msg }}
+{% endif %}
 
 {% if user.is_authenticated %}
 <h3> Bonjour {{ user.username }} bienvenu sur Locars</h3>
