@@ -2,33 +2,54 @@
 {% load static %}
 {% block content %}
     <div class="ProfilePage">
-        <h1>
+        <h1 id="MyProfile">
             Mon Profil
         </h1>
-        Membre depuis : {{ user.date_creation | date:"M Y" }}
-        
+
         <br>
         
-        {{ user.first_name }}
-        {{ user.last_name}}
+        <div id="NameProfile">
+            {{ user.first_name }}
+            {{ user.last_name}}
+        </div>
+        <div id="MemberProfile">
+            Membre depuis : {{ user.date_creation | date:"M Y" }}
+        </div>
+        
+
         <!--{{ user.nb_voyage }}-->
+        <br>
+        <br>
+        {% for message in messages %}
+
+        <div id="Message" class="{% if message.tags == 'error' %}ErrorMessage{% elif message.tags == 'success' %}SuccessMessage{% endif %}">
+            {{ message }}
+        </div>
+
+        {% endfor %}
+        <br>
+        <br>
+        <div id="FormProfile">
+            <form method="post" enctype="multipart/form-data" action="">
+                {% csrf_token %}
+                <label for="profilePicture">Upload :</label>
+                <input type="file" id="profilePicture" name="profilePicture">
+                <br>
+                <br>
+                <label for="first_name">Prénom :</label>
+                <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}">
+                <br>
+                <br>
+                <label for="last_name">Nom de Famille :</label>
+                <input type="text" id="last_name" name="last_name" value="{{ user.last_name}}">
+                <br>
+                <br>
+                <button type="submit" class="btn BtnSaveProfile">Sauvegarder</button>
+            </form>
+        </div>
+
+        <br>
+        <br>
+        <br>
     </div>
-
-
-    <form method="post" enctype="multipart/form-data" action="">
-        {% csrf_token %}
-        <label for="profilePicture">Upload :</label>
-        <input type="file" id="profilePicture" name="profilePicture">
-        <br>
-        <br>
-        <label for="first_name">Prénom :</label>
-        <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}">
-        <br>
-        <br>
-        <label for="last_name">Nom de Famille</label>
-        <input type="text" id="last_name" name="last_name" value="{{ user.last_name}}">
-        <br>
-        <br>
-        <button type="submit" class="btn custom-button">Sauvegarder</button>
-    </form>
 {% endblock %}

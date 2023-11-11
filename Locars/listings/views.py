@@ -16,80 +16,21 @@ from django.conf import settings
 from decouple import config
 import smtplib
 from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from django.template.loader import render_to_string
 #from .forms import UserRegistrationForm
 #from .models import CustomUserManager
 
 
 def Home(request: HttpRequest):
-    """
-    The home function renders the home page of the Locars website.
-    
-    
-    :param request: HttpRequest: Pass the request from the server to the function
-    :return: The Home
-    """
-    """
-    ctx = {}
-    if request.method == 'POST': 
-        email = request.POST.get('email')
-        subjet = "Test Email"
-        template = 'listings/EmailSend.html'
-        context = {'date': datetime.today().date,
-                   'email': email
-                   }
-        receivers = [email]
-        has_send = send_email_with_html_body(subjet= subjet, 
-                                  receivers= receivers, 
-                                  template= template, 
-                                  context= context)
-        
-        if has_send:
-            ctx = {"msg":"mail envoyee avec success."}
-        else:
-            ctx = {"msg":"mail echouer."}
-        
-    return render(request, 'listings/Home.html', ctx)
-    #return render(request, 'listings/Home.html')
-"""
-    if request.method == 'POST':
-        form = EmailForm(request.POST)
-        if form.is_valid():
-            # Adresse e-mail du destinataire
-            to_email = form.cleaned_data['to_email']
-            # Création du message
-            subject = 'Activation du compte'
-            body = 'Bonjour bienvenue chez Locars'
-            message = MIMEText(body)
-            message['Subject'] = subject
-            message['From'] = settings.EMAIL_HOST_USER
-            message['To'] = to_email
-            # Envoi de l'e-mail
-            with smtplib.SMTP(settings.EMAIL_HOST, settings.EMAIL_PORT) as server:
-                server.starttls()  # Utilisez cette ligne si EMAIL_USE_TLS est True
-                server.login(settings.EMAIL_HOST_USER, settings.EMAIL_HOST_PASSWORD)
-                server.sendmail(settings.EMAIL_HOST_USER, [to_email], message.as_string())
-
-            return render(request, 'listings/Home.html', {'to_email': to_email})
-    else:
-        form = EmailForm()
-
-    return render(request, 'listings/Home.html', {'form': form})
-
-
-
-
-
-
-
-
-
-
+    return render(request, 'listings/Home.html')
 
 def Register(request):
     if request.method == "POST":
         form = UserForm(request.POST)
 
         if form.is_valid():
+
             # Vérifiez si les mots de passe correspondent
             username = form.cleaned_data['username']
             email = form.cleaned_data['email']
@@ -148,7 +89,7 @@ def Profile(request: HttpRequest):
 
             # Enregistrez le formulaire
             form.save()
-
+            messages.success(request, 'Votre compte a été créé avec succès')
             return redirect('Profile')  # Redirigez l'utilisateur vers une autre page après la modification
     else:
         form = ProfilForm(instance=request.user)
@@ -184,6 +125,38 @@ def Account(request: HttpRequest):
         form = ProfilForm(instance=request.user)
     return render(request, 'listings/Account.html')
 
+
+
+"""
+
+            # Création du message multipart (texte et HTML)
+            message = MIMEMultipart("alternative")
+            # Adresse e-mail du destinataire
+            to_email = email
+            # Création du message
+            subject = 'Activation du compte'
+            text_body = 'Bonjour bienvenue chez Locars'
+
+            # Corps en HTML
+            html_body = render_to_string('listings/EmailSend.html', {'username': username})  # Remplace avec tes données
+
+            # Ajout des parties texte et HTML au message multipart
+            message.attach(MIMEText(text_body, 'plain'))
+            message.attach(MIMEText(html_body, 'html'))
+
+            message = MIMEText(body)
+            message['Subject'] = subject
+            message['From'] = settings.EMAIL_HOST_USER
+            message['To'] = to_email
+            # Envoi de l'e-mail
+            with smtplib.SMTP(settings.EMAIL_HOST, settings.EMAIL_PORT) as server:
+                server.starttls()  # Utilisez cette ligne si EMAIL_USE_TLS est True
+                server.login(settings.EMAIL_HOST_USER, settings.EMAIL_HOST_PASSWORD)
+                server.sendmail(settings.EMAIL_HOST_USER, [to_email], message.as_string())
+
+
+
+"""
 @login_required
 def DeleteAccount(request: HttpRequest):
     if request.method == 'POST':

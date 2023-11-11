@@ -2,30 +2,7 @@
 {% load static %}
 {% block content %}
 
-<!--{% for message in messages %}
 
-<strong>{{ message }}</strong>
-{% endfor %}
-
-<h1> Bienvenu sur Email testing avec django </h1>
-
-    {% if msg %}
-        <h4> {{ msg }}</h4>
-    {% endif %}    
-    
-    <form action="" method="post">
-        {% csrf_token %}
-        <label for="email"></label>
-        <input id="email" name="email" type="email" placeholder="Enter your email address">
-        <button type="submit"> Envoyez </button>
-    </form>
--->
-<h2>Envoyer un E-mail</h2>
-    <form method="post" action="">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Envoyer</button>
-    </form>
 {% if user.is_authenticated %}
 <h3> Bonjour {{ user.username }} bienvenu sur Locars</h3>
 voici votre numéro de téléphone {{ user.phone_no }}

@@ -5,8 +5,25 @@
 
 body {
     top: 500px;
-    background-color: rgb(175, 172, 172);
+    background-color: rgb(241, 239, 239);
     
+}
+
+/* Message d'erreur/ Success */
+
+#Message{
+    position: absolute;
+    left: 35%;
+}
+
+/* Style pour les messages d'erreur */
+.ErrorMessage {
+    color: red;
+}
+
+/* Style pour les messages de succès */
+.SuccessMessage {
+    color: green;
 }
 
 /* Header */
@@ -14,20 +31,20 @@ body {
 .header {
     top: 0;
     width: 100%;
-    background-color: rgb(93, 182, 152);
+    background-color: rgb(33, 57, 59);
 }
 .Logo {
     font-size: 60px;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     margin-left: 50px;
 }
 
 .Logo:hover{
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     text-decoration: none;
-    border: 1px solid rgb(89, 173, 145);
+    border: 1px solid #ccc;
     border-radius: 10px;
-    background-color: rgb(89, 173, 145);
+    background-color: rgb(58, 115, 121);
 }
 
 
@@ -43,13 +60,13 @@ body {
     background-color: rgb(240, 237, 237);
     border: 1px solid #ccc;
     border-radius: 10px;
-    width: 200px;
-    height: 150px;
+    width: 400px;
     padding: 10px;
     position: absolute;
     justify-content: space-between;
     top: 55px;
     right: 50px;
+    z-index: 2;
 }
 
 .nav-list li {
@@ -196,5 +213,73 @@ body {
 
 .ProfilePage {
     position: absolute;
-    top: 200px;
+    top: 150px;
+    left: 300px;
+    width: 1530px;
+    z-index: 1;
 }
+
+#MyProfile {
+    text-align: center;
+    font-size: 60px;
+}
+
+#NameProfile {
+    font-size: 40px;
+    margin-left: 15px;
+}
+#MemberProfile {
+    margin-left: 15px;
+}
+
+#FormProfile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(209, 207, 207);
+    border-radius: 5px;
+    width: 500px;
+    margin: auto;
+    background-color: #e7e7e7;
+    
+}
+form {
+    margin: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input {
+    width: 100%;
+    margin-bottom: 16px;
+    border-radius: 5px;
+    border: 1px solid rgb(0, 0, 0);
+}
+
+#profilePicture {
+    border: 1px solid #e7e7e7;
+}
+
+.BtnSaveProfile{
+    background-color: #e7e7e7;
+    border: 1px solid rgb(0, 0, 0);
+}
+.BtnSaveProfile:hover{
+    background-color: #cccccc;
+}
+
+/* Account page */
+
+#BtnDellAccount {
+    position: absolute;
+    right: 10px;
+}
+
+#BtnDellAccount:hover {
+    background-color: red;
+    border-radius: 5px;
+}
+

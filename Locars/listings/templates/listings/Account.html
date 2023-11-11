@@ -1,42 +1,54 @@
 {% extends 'listings/BaseProfile.html' %}
 {% load static %}
 {% block content %}
+    <div class="ProfilePage">
 
-    <form method="post" action="">
-        {% csrf_token %}
-        <label for="email">Email :</label>
-        <input type="email" id="email" name="email" value="{{ user.email }}">
-        <br>
-        <br>
-        <label for="phone_no">Numéro de Téléphone</label>
-        <input type="tel" id="phone_no" name="phone_no" required pattern="[0-9]{10}" value="{{ user.phone_no }}">
-        <br>
-        <br>
-        <label for="country">Pays :</label>
-        <input type="text" id="country" name="country" value="{{ user.country }}">
-        <br>
-        <br>
-        <label for="city">Ville</label>
-        <input type="text" id="city" name="city" value="{{ user.city }}">
-        <br>
-        <br>
-        <label for="street">Rue</label>
-        <input type="text" id="street" name="street" value="{{ user.street }}">
-        <br>
-        <br>
-
-        <button type="submit" class="btn custom-button">Sauvegarder</button>
-    </form>
     
+        <h1 id="MyProfile">
+            Mon Compte
+        </h1>
+        <br>
+        <br>
+        <br>
+        <div id="FormProfile">
+            <form method="post" action="">
+            {% csrf_token %}
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" value="{{ user.email }}">
+            <br>
+            <br>
+            <label for="phone_no">Numéro de Téléphone</label>
+            <input type="tel" id="phone_no" name="phone_no" required pattern="[0-9]{10}" value="{{ user.phone_no }}">
+            <br>
+            <br>
+            <label for="country">Pays :</label>
+            <input type="text" id="country" name="country" value="{{ user.country }}">
+            <br>
+            <br>
+            <label for="city">Ville</label>
+            <input type="text" id="city" name="city" value="{{ user.city }}">
+            <br>
+            <br>
+            <label for="street">Rue</label>
+            <input type="text" id="street" name="street" value="{{ user.street }}">
+            <br>
+            <br>
 
-    <button type="button" class="btn custom-button">
-        <a href="{% url 'DeleteAccount' %}" class="ProfilBarDeconnectButton">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
-                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
-              </svg>
-            Supprimer le Compte
-        </a>
-    </button>
-
+            <button type="submit" class="btn custom-button">Sauvegarder</button>
+        </form>
+        </div>
+        
+        <div id="BtnDellAccount">
+            <button type="button" class="btn custom-button">
+            <a href="{% url 'DeleteAccount' %}" class="ProfilBarDeconnectButton">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                  </svg>
+                Supprimer le Compte
+            </a>
+        </button>
+        </div>
+        
+    </div>
 {% endblock %}
