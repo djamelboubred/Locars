@@ -2,36 +2,56 @@
 {% load static %}
 {% block content %}
     <div class="LocaristPage">
-        <h2> Bonjour {{ user.username }} bienvenue sur Votre Futur Page de gestion de vos véhicules</h2>
+        <div id="Locarist">
+            <h2> Bonjour {{ user.username }} bienvenue sur Votre Futur Page de gestion de vos véhicules</h2>
 
-        <h3>Nous allons enregistrer votre premier véhicules ensemble.</h3>
+            <h3>Nous allons enregistrer votre premier véhicules ensemble.</h3>
+        </div>
 
-        <form method="post" action="">
-            {% csrf_token %}
-            <label for="email">Email :</label>
-            <input type="email" id="email" name="email" value="{{ user.email }}">
-            <br>
-            <br>
-            <label for="phone_no">Numéro de Téléphone</label>
-            <input type="tel" id="phone_no" name="phone_no" required pattern="[0-9]{10}" value="{{ user.phone_no }}">
-            <br>
-            <br>
-            <label for="country">Pays :</label>
-            <input type="text" id="country" name="country" value="{{ user.country }}">
-            <br>
-            <br>
-            <label for="city">Ville</label>
-            <input type="text" id="city" name="city" value="{{ user.city }}">
-            <br>
-            <br>
-            <label for="street">Rue</label>
-            <input type="text" id="street" name="street" value="{{ user.street }}">
-            <br>
-            <br>
+        <div id="FormProfile">
+            <form method="post" action="">
+                {% csrf_token %}
+                <label for="id_fuel_type">Type de carburant :</label>
+                <select name="fuel_type" id="id_fuel_type">
+                  <option value="A" {% if selected_fuel_type == 'A' %}selected{% endif %}>Essence</option>
+                  <option value="B" {% if selected_fuel_type == 'B' %}selected{% endif %}>Diesel</option>
+                  <option value="C" {% if selected_fuel_type == 'C' %}selected{% endif %}>Électrique</option>
+                </select>
+                <br>
+                <br>
+                <label for="marque">Marque</label>
+                <input type="tel" id="phone_no" name="phone_no" required pattern="[0-9]{10}" value="{{ user.phone_no }}">
+                <br>
+                <br>
+                <label for="model">Modèle :</label>
+                <input type="text" id="country" name="country">
+                <br>
+                <br>
+                <label for="year">Année :</label>
+                <input type="text" id="country" name="country">
+                <br>
+                <label for="licence_plate">Plaque d'Immatriculation :</label>
+                <input type="text" id="country" name="country">
+                <br>
+                <label for="km">Compteur Kilométrique :</label>
+                <input type="text" id="country" name="country">
+                <br>
+                <label for="country">Pays :</label>
+                <input type="text" id="country" name="country" value="{{ user.country }}">
+                <br>
+                <br>
+                <label for="city">Ville</label>
+                <input type="text" id="city" name="city" value="{{ user.city }}">
+                <br>
+                <br>
+                <label for="street">Rue</label>
+                <input type="text" id="street" name="street" value="{{ user.street }}">
+                <br>
+                <br>
 
-            <button type="submit" class="btn custom-button">Sauvegarder</button>
-        </form>
-
+                <button type="submit" class="btn custom-button">Sauvegarder</button>
+            </form>
+        </div>
 
     </div>
 {% endblock %}

@@ -331,3 +331,17 @@ input {
 
 /* Locarist Page */
 
+.LocaristPage {
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    width: 80%;
+    min-width: 300px;
+    margin: auto;
+    z-index: 1;
+}
+
+#Locarist {
+    text-align: center;
+    font-size: 40px;
+}

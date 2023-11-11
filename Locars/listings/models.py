@@ -40,7 +40,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     #Indique si l'utilisateur est déjà un hôte (default = NON)
     locarist = models.BooleanField(default=False)
 
-    #adresse ded l'utilisateur
+    #adresse de l'utilisateur
     country = models.CharField(max_length=42, blank=True)
     city = models.CharField(max_length=58, blank=True)
     street = models.CharField(max_length=50, blank=True)
@@ -73,7 +73,14 @@ class Car(models.Model):
     marque = models.CharField(max_length=50, default='')
     model = models.CharField(max_length=50, default='')
     year = models.PositiveIntegerField()
-    
+    km = models.IntegerField(default=0)
+    licence_plate = models.CharField(max_length=50, default='')
+
+    #adresse du Véhicule
+    country = models.CharField(max_length=42, blank=True)
+    city = models.CharField(max_length=58, blank=True)
+    street = models.CharField(max_length=50, blank=True)
+
 
     fuel = models.CharField(max_length=1, choices=FUEL_CHOICES)
     def __str__(self):
