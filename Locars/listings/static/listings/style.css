@@ -6,6 +6,7 @@
 body {
     top: 500px;
     background-color: rgb(241, 239, 239);
+    width: 100%;
     
 }
 
@@ -167,7 +168,8 @@ body {
 /* bar de navigation des pages lier au compte */
 
 .navProfile {
-    width: 300px;
+    width: 15%;
+    min-width: 300px;
     background-color: rgb(33, 57, 59);
     height: 100vh;
     float:left;
@@ -213,9 +215,11 @@ body {
 
 .ProfilePage {
     position: absolute;
-    top: 150px;
-    left: 300px;
-    width: 1530px;
+    top: 15%;
+    left: 15%;
+    width: 80%;
+    min-width: 300px;
+    margin: auto;
     z-index: 1;
 }
 
@@ -226,10 +230,10 @@ body {
 
 #NameProfile {
     font-size: 40px;
-    margin-left: 15px;
+    margin-left: 5%;
 }
 #MemberProfile {
-    margin-left: 15px;
+    margin-left: 5%;
 }
 
 #FormProfile {
@@ -282,4 +286,48 @@ input {
     background-color: red;
     border-radius: 5px;
 }
+
+/* Delete Account Page */
+
+.DeleteAccountPage {
+    position: absolute;
+    top: 40%;
+    left: 15%;
+    width: 80%;
+    min-width: 300px;
+    margin: auto;
+    z-index: 1;
+    text-align: center;
+}
+
+.DeleteAccountPage a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.BtnDeletedAccount {
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 5px;
+}
+.BtnDeletedAccount:hover{
+    background-color: #ff0000; /* Couleur de fond rouge au survol */
+    color: #ffffff; /* Couleur du texte blanche au survol */
+    cursor: pointer; /* Curseur indiquant que le bouton est actif */
+}
+
+.BtnDeletedAccountExit {
+    text-decoration: none;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 5px;
+    
+}
+.BtnDeletedAccountExit:hover{
+    text-decoration: none;
+    background-color: green; /* Couleur de fond rouge au survol */
+    color: #ffffff; /* Couleur du texte blanche au survol */
+    cursor: pointer; /* Curseur indiquant que le bouton est actif */
+    border-radius: 5px;
+}
+
+/* Locarist Page */
 

@@ -1,7 +1,37 @@
 {% extends 'listings/BaseProfile.html' %}
 {% load static %}
 {% block content %}
+    <div class="LocaristPage">
+        <h2> Bonjour {{ user.username }} bienvenue sur Votre Futur Page de gestion de vos véhicules</h2>
 
-    <h3> Bonjour {{ user.username }} bienvenue sur votre profile</h3>
+        <h3>Nous allons enregistrer votre premier véhicules ensemble.</h3>
 
+        <form method="post" action="">
+            {% csrf_token %}
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" value="{{ user.email }}">
+            <br>
+            <br>
+            <label for="phone_no">Numéro de Téléphone</label>
+            <input type="tel" id="phone_no" name="phone_no" required pattern="[0-9]{10}" value="{{ user.phone_no }}">
+            <br>
+            <br>
+            <label for="country">Pays :</label>
+            <input type="text" id="country" name="country" value="{{ user.country }}">
+            <br>
+            <br>
+            <label for="city">Ville</label>
+            <input type="text" id="city" name="city" value="{{ user.city }}">
+            <br>
+            <br>
+            <label for="street">Rue</label>
+            <input type="text" id="street" name="street" value="{{ user.street }}">
+            <br>
+            <br>
+
+            <button type="submit" class="btn custom-button">Sauvegarder</button>
+        </form>
+
+
+    </div>
 {% endblock %}
