@@ -19,18 +19,19 @@
                         - [X] First Name
                         - [X] Last Name
                         - [X] Profile Picture
-                    - [ ] Account 10/11
+                    - [ ] Account 10/11 (vérifications des comptes dans la mise à jour 1.1)
                         - [X] Dell user
                         - [ ] Modify information of user
-                            - [ ] Adress
+                            - [X] Adress
                             - [ ] Identy
-                            - [ ] Mail
-                            - [ ] Phone number
+                            - [X] Mail
+                                - [ ] Verify you email
+                            - [X] Phone number
                             - [ ] RIB ?
                     - [ ] Locarist
                         - [ ] First cars
                             - [ ] Adress
-                            - [ ] Immatriculate
+                            - [ ] Immatriculate (vérification des plaques d'immatriculation dans la mise à jour 1.2)
                             - [ ] Manual/automate
                         - [ ] Add cars
                             - [ ] Adress
@@ -58,7 +59,7 @@
     - [X] Register -> Djams
     - [ ] Help -> FEFE
     - [ ] Cars
-    - [ ] Account
+    - [X] Account
     - [ ] Became Host
         - [ ] my cars
         etc.
@@ -74,15 +75,30 @@
     - [ ] search in home 
     - [ ] Login
         - [ ] verify information => with JavaScript
-        - [ ] redirect client in Account or Connection Pages after Connect
+        - [X] redirect client in Account or Connection Pages after Connect
         - [ ] Send mail with gmail protocole
             - [ ] use no reply mail adress
-        - [ ] if user register authentificate pass connection page
-        - [ ] Use email or username for connection
+        - [X] if user register authentificate pass connection page
+        - [X] Use email or username for connection
         - [ ] Create link for verify your account
         - [X] create superUser -> Djams
             - [X] username => djams
             - [X] password => dianes
+        - [ ] User
+            - [X] email
+            - [X] username
+            - [X] first_name
+            - [X] last_name
+            - [X] phone_no
+            - [X] profilePicture
+            - [X] locarist (bolean)
+            - [X] country
+            - [X] city
+            - [X] street
+            - [ ] BirthDay
+            - [ ] Permis or Identity Card
+
+    date_creation = models.DateTimeField(auto_now_add=True)
     - [ ] add cars
     - [ ] Became Host
 
@@ -102,4 +118,10 @@
 
 
 
+
+
+Mise à jour 1.1
+
+Crypter donné
+vérifier compte d'utilisateur avec permis, carte d'identité
 

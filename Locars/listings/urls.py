@@ -16,5 +16,5 @@ urlpatterns = [
     path('mycars/', views.MyCars, name='MyCars'),
     path('deleteAccount/', views.DeleteAccount, name='DeleteAccount'),
     path('accountDeleted/', views.AccountDeleted, name='AccountDeleted'),
-    path('locarist/', views.LocaristPlus, name='LocaristPlus')
+    path('locaristPlus/<str:voiture_id>/', views.LocaristPlus, name='LocaristPlus')
 ]

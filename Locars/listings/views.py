@@ -1,11 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpRequest, JsonResponse
 from . import forms
 from django.contrib.auth import login, authenticate, logout # import des fonctions login et authenticate
 from django.contrib.auth.decorators import login_required #import fonctions de gestions des authentifications pour les pages
 from django.contrib.auth.models import User
 from django.contrib import messages
-
+from django.urls import reverse
 from django.core.mail import send_mail
 from .forms import UserForm, ProfilForm, AccountForm, EmailForm, CarForm, CarTestForm
 from .models import User, Cars
@@ -224,22 +224,24 @@ def Locarist(request: HttpRequest):
         car.save()
 
         ## Après avoir créé l'objet Cars, récupérez son ID unique
-        #car_id = car.id  # Assurez-vous de remplacer cela par la vraie façon de récupérer l'ID
+        car_id = car.licences_plate 
 
         ## Construisez l'URL de la vue de modification en utilisant l'ID de la voiture
-        #modification_url = reverse('modifier_voiture', kwargs={'voiture_id': car_id})
+        modification_url = reverse('LocaristPlus', kwargs={'voiture_id': car_id})
 
         ## Redirigez l'utilisateur vers la vue de modification
-        #return redirect(modification_url)
-        return redirect('LocaristPlus')
+        return redirect(modification_url)
+        #return redirect('LocaristPlus')
     else:
         print(f"Form errors: {form.errors}")
 
     return render(request, 'listings/Locarist.html')
 
 @login_required
-def LocaristPlus(request: HttpRequest):
-    
+def LocaristPlus(request: HttpRequest, voiture_id):
+    # Récupérez l'objet Cars à modifier ou renvoyez une erreur 404 s'il n'existe pas
+    #voiture = get_object_or_404(Cars, pk=voiture_id)
+    print(f"Voiture id : {voiture_id}")
     return render(request, 'listings/Favories.html')
 
 @login_required
