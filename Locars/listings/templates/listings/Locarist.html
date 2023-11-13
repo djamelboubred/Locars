@@ -8,46 +8,60 @@
             <h3>Nous allons enregistrer votre premier véhicules ensemble.</h3>
         </div>
 
-        <div id="FormProfile">
+        <div id="FormLocarist">
             <form method="post" action="">
                 {% csrf_token %}
-                <label for="id_fuel_type">Type de carburant :</label>
-                <select name="fuel_type" id="id_fuel_type">
-                  <option value="A" {% if selected_fuel_type == 'A' %}selected{% endif %}>Essence</option>
-                  <option value="B" {% if selected_fuel_type == 'B' %}selected{% endif %}>Diesel</option>
-                  <option value="C" {% if selected_fuel_type == 'C' %}selected{% endif %}>Électrique</option>
-                </select>
-                <br>
-                <br>
-                <label for="marque">Marque</label>
-                <input type="tel" id="phone_no" name="phone_no" required pattern="[0-9]{10}" value="{{ user.phone_no }}">
-                <br>
-                <br>
-                <label for="model">Modèle :</label>
-                <input type="text" id="country" name="country">
-                <br>
+                <div id="DisplayFlexDirectionColumns">
+                    <label for="marque">Marque</label>
+                    <input type="text" id="marque" name="marque" required>
+                    <br>
+                    <label for="model">Modèle :</label>
+                    <input type="text" id="model" name="model">
+                </div>
+
                 <br>
                 <label for="year">Année :</label>
-                <input type="text" id="country" name="country">
+                <input type="text" id="year" name="year">
                 <br>
-                <label for="licence_plate">Plaque d'Immatriculation :</label>
-                <input type="text" id="country" name="country">
+                <label for="licences_plate">Plaque d'Immatriculation :</label>
+                <input type="text" id="licences_plate" name="licences_plate">
                 <br>
-                <label for="km">Compteur Kilométrique :</label>
-                <input type="text" id="country" name="country">
+                
+                       <label for="km">Compteur Kilométrique :</label>
+                <input type="text" id="km" name="km">
                 <br>
-                <label for="country">Pays :</label>
-                <input type="text" id="country" name="country" value="{{ user.country }}">
+                
+             
+
+                <label>Type de carburant :</label>
+                <div id="DisplayFlexDirectionColumns">
+                    <input type="radio" name="fuel" value="A" {% if selected_fuel_type == 'A' %}checked{% endif %}> Essence
+                    <input type="radio" name="fuel" value="B" {% if selected_fuel_type == 'B' %}checked{% endif %}> Diesel
+                    <input type="radio" name="fuel" value="C" {% if selected_fuel_type == 'C' %}checked{% endif %}> Hybride
+                    <input type="radio" name="fuel" value="D" {% if selected_fuel_type == 'D' %}checked{% endif %}> Électrique
+                </div>
+                <br>
+
+                <div id="DisplayFlexDirectionColumns">
+                    <label for="country">Pays :</label>
+                    <br>
+                    <input type="text" id="country" name="country">
+                    <br>
+                    <br>
+                    <label for="city">Ville</label>
+                    <input type="text" id="city" name="city">
+                </div>
+                    <br>
+                    <br>
+                    <label for="street">Rue</label>
+                    <input type="text" id="street" name="street">
+                
+
                 <br>
                 <br>
-                <label for="city">Ville</label>
-                <input type="text" id="city" name="city" value="{{ user.city }}">
-                <br>
-                <br>
-                <label for="street">Rue</label>
-                <input type="text" id="street" name="street" value="{{ user.street }}">
-                <br>
-                <br>
+
+
+              
 
                 <button type="submit" class="btn custom-button">Sauvegarder</button>
             </form>

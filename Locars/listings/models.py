@@ -67,24 +67,83 @@ class Car(models.Model):
     FUEL_CHOICES = (
         ('A', 'Essence'),
         ('B', 'Diesel'),
-        ('C', 'Électrique'),
+        ('C', 'Hybride'),
+        ('D', 'Électrique'),
     )
+
+    GEARDBOX = {
+        ('A', 'Automatique'),
+        ('B', 'Manuelle'),
+    }
 
     marque = models.CharField(max_length=50, default='')
     model = models.CharField(max_length=50, default='')
-    year = models.PositiveIntegerField()
-    km = models.IntegerField(default=0)
-    licence_plate = models.CharField(max_length=50, default='')
+    year = models.PositiveIntegerField(default='')
+    km = models.IntegerField(default=0, blank=True)
+    licence_plate = models.CharField(max_length=20, unique=True)
+    nb_door = models.IntegerField(default=0, blank=True, null=True)
 
     #adresse du Véhicule
-    country = models.CharField(max_length=42, blank=True)
-    city = models.CharField(max_length=58, blank=True)
-    street = models.CharField(max_length=50, blank=True)
+    country = models.CharField(max_length=42, blank=False)
+    city = models.CharField(max_length=58, blank=False)
+    street = models.CharField(max_length=50, blank=False)
 
+    # Déclaration de la clé étrangère vers le modèle User
+    username = models.ForeignKey(User, on_delete=models.CASCADE, default='')
 
-    fuel = models.CharField(max_length=1, choices=FUEL_CHOICES)
+    fuel = models.CharField(max_length=1, choices=FUEL_CHOICES, blank=False)
+    
+    geardbox = models.CharField(max_length=1, choices=GEARDBOX, blank=True, null=True)
+    
+    
     def __str__(self):
-        return self.name
+        return self.licence_plate
+
+
+class Cars(models.Model):
+    
+    FUEL_CHOICES = (
+        ('A', 'Essence'),
+        ('B', 'Diesel'),
+        ('C', 'Hybride'),
+        ('D', 'Électrique'),
+    )
+
+    GEARDBOX = {
+        ('A', 'Automatique'),
+        ('B', 'Manuelle'),
+    }
+
+    
+    licences_plate = models.CharField(max_length=20, unique=True)
+
+    marque = models.CharField(max_length=50, default='')
+    model = models.CharField(max_length=50, default='')
+    year = models.IntegerField(default=0)
+    km = models.IntegerField(default=0, blank=True)
+
+
+    #adresse du Véhicule
+    country = models.CharField(max_length=42, blank=False, default='')
+    city = models.CharField(max_length=58, blank=False, default='')
+    street = models.CharField(max_length=50, blank=False, default='')
+
+    
+    #Choix des paramètre de la voiture
+    fuel = models.CharField(max_length=1, choices=FUEL_CHOICES, blank=False, default='')
+    
+
+    #Informations complémentaire
+    nb_door = models.IntegerField(default=0, blank=True, null=True)
+    geardbox = models.CharField(max_length=1, choices=GEARDBOX, blank=True, null=True)
+    profilePicture = models.ImageField(upload_to='cars_picture/',
+                            default='profile_picture/default_images/cars.png')
+
+    # Déclaration de la clé étrangère vers le modèle User
+    username = models.ForeignKey(User, on_delete=models.CASCADE, related_name='cars',default='')
+
+    def __str__(self):
+        return self.licences_plate
 
 """class User(AbstractUser):
     HOST = 'HOST'

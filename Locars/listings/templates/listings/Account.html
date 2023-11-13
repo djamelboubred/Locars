@@ -21,16 +21,19 @@
             <input type="tel" id="phone_no" name="phone_no" required pattern="[0-9]{10}" value="{{ user.phone_no }}">
             <br>
             <br>
-            <label for="country">Pays :</label>
-            <input type="text" id="country" name="country" value="{{ user.country }}">
-            <br>
-            <br>
-            <label for="city">Ville</label>
-            <input type="text" id="city" name="city" value="{{ user.city }}">
-            <br>
-            <br>
-            <label for="street">Rue</label>
-            <input type="text" id="street" name="street" value="{{ user.street }}">
+            <div id="Adress">
+                <label for="country">Pays :</label>
+                <input type="text" id="country" name="country" value="{{ user.country }}">
+                <br>
+                <br>
+                <label for="city">Ville</label>
+                <input type="text" id="city" name="city" value="{{ user.city }}">
+                <br>
+                <br>
+                <label for="street">Rue</label>
+                <input type="text" id="street" name="street" value="{{ user.street }}">
+            </div>
+
             <br>
             <br>
 

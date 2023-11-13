@@ -7,17 +7,17 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 
 from django.core.mail import send_mail
-from .forms import UserForm, ProfilForm, AccountForm, EmailForm
-from .models import User, Car
+from .forms import UserForm, ProfilForm, AccountForm, EmailForm, CarForm, CarTestForm
+from .models import User, Cars
 from django.utils import timezone 
 from datetime import datetime
 #from .utils import send_email_with_html_body
 from django.conf import settings
-from decouple import config
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from django.template.loader import render_to_string
+from django.core.exceptions import ObjectDoesNotExist
 #from .forms import UserRegistrationForm
 #from .models import CustomUserManager
 
@@ -173,7 +173,8 @@ def AccountDeleted(request: HttpRequest):
     Auto fresh page in 3 seconds redirect in home page
     """
     return render(request, 'listings/AccountDelete.html')
-    
+
+@login_required   
 def Locarist(request: HttpRequest):
     """
     The Profile function renders the Locarist page of the Locars website.
@@ -183,8 +184,63 @@ def Locarist(request: HttpRequest):
     :param request: HttpRequest: Pass the request from the server to the function
     :return: The Locarist
     """
+    form = CarTestForm(request.POST)
+
+
+    # Vérifiez si le formulaire est valide
+    if form.is_valid():
+
+
+        # Récupérez l'utilisateur actuellement connecté
+        username = request.user
+
+        licences_plate = form.cleaned_data['licences_plate']
+
+        marque = form.cleaned_data['marque']
+        model = form.cleaned_data['model']
+        year = form.cleaned_data['year']
+        km = form.cleaned_data['km']
+
+        country = form.cleaned_data['country']
+        city = form.cleaned_data['city']
+        street = form.cleaned_data['street']
+
+        fuel = form.cleaned_data['fuel']
+
+        car = Cars.objects.create(username=username)
+
+
+
+        car.licences_plate = licences_plate
+        car.username = username
+        car.marque = marque
+        car.model = model
+        car.year = year
+        car.km = km
+        car.country = country
+        car.city = city
+        car.street = street
+        car.fuel = fuel
+        car.save()
+
+        ## Après avoir créé l'objet Cars, récupérez son ID unique
+        #car_id = car.id  # Assurez-vous de remplacer cela par la vraie façon de récupérer l'ID
+
+        ## Construisez l'URL de la vue de modification en utilisant l'ID de la voiture
+        #modification_url = reverse('modifier_voiture', kwargs={'voiture_id': car_id})
+
+        ## Redirigez l'utilisateur vers la vue de modification
+        #return redirect(modification_url)
+        return redirect('LocaristPlus')
+    else:
+        print(f"Form errors: {form.errors}")
 
     return render(request, 'listings/Locarist.html')
+
+@login_required
+def LocaristPlus(request: HttpRequest):
+    
+    return render(request, 'listings/Favories.html')
 
 @login_required
 def Favories(request: HttpRequest):
@@ -220,4 +276,4 @@ def MyCars(request: HttpRequest):
     :param request: HttpRequest: Pass the request from the server to the function
     :return: The MyCars
     """
-    return render(request, 'listings/MyCars.html')
+    return render(request, 'listings/Mycars.html')

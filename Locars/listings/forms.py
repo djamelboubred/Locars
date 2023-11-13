@@ -1,5 +1,5 @@
 from django import forms
-from .models import User, Car
+from .models import User, Cars, Car
 
 class UserForm(forms.ModelForm):
     class Meta:
@@ -11,7 +11,18 @@ class UserForm(forms.ModelForm):
 class CarForm(forms.ModelForm):
     class Meta:
         model = Car
-        fields = ['marque', 'model', 'year', 'fuel']
+        fields = ['licence_plate','marque', 'model', 'year', 'fuel','km', 'country', 'city', 'street', 'username']
+
+class CarTestForm(forms.ModelForm):
+    class Meta:
+        model = Cars
+        fields = ['licences_plate', 'marque', 'model', 'year','km', 'country', 'city', 'street', 'fuel']
+        exclude = ['username']
+
+class CarPlusForm(forms.ModelForm):
+    class Meta:
+        model = Cars
+        fields = ['nb_door', 'geardbox', 'profilePicture']
 
 class ProfilForm(forms.ModelForm):
     class Meta:
