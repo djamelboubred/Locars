@@ -361,3 +361,9 @@ input {
     margin: auto;
     background-color: #e7e7e7;
 }
+
+/* Page de contact, dont id="contact_body"*/
+#contact_body h1{ 
+    /* Ne concerne seulement la balise <h1> */
+    text-align: center;
+}

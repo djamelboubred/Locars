@@ -13,7 +13,7 @@
     <link href="{% static 'listings/style.css'%}" rel="stylesheet"/>
 </head>
 
-<header>
+<header> <!-- Barre de navigation -->
     <div class="header">
         <a href="{% url 'Home' %}" class="Logo">Locars</a>
         <div class="navbar">
@@ -50,12 +50,12 @@
                         </a>
                     </li>
                     {% else %}
-                    <li><a href="{% url 'Login' %}">Connection</a></li>
+                    <li><a href="{% url 'Login' %}">Connexion</a></li>
                     <li><a href="{% url 'Register' %}">S'inscrire</a></li>
                     {% endif %}
 
                     <li><a href="#">Locars</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="{% url 'Contact' %}">Contact</a></li>
                 </ul>
             </div>
         </div>

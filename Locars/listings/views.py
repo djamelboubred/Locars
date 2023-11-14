@@ -279,3 +279,6 @@ def MyCars(request: HttpRequest):
     :return: The MyCars
     """
     return render(request, 'listings/Mycars.html')
+
+def Contact(request : HttpRequest):
+    return render(request, 'listings/Contact.html')
