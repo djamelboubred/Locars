@@ -40,9 +40,9 @@
                             - [X] Immatriculate
                             - [X] Manual/automate
                         - [ ] MyCars
-                            - [ ] Add cars
-                            - [ ] Details Cars
-                            - [ ] Dell cars
+                            - [X] Add cars
+                            - [X] Details Cars
+                            - [X] Dell cars
                     - [ ] Favories
                     - [ ] Travel
                     - [ ] Became Locarist
