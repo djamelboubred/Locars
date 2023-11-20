@@ -1,4 +1,6 @@
 import logging
+import random
+import string
 
 from django.conf import settings
 from django.template.loader import render_to_string
@@ -37,3 +39,15 @@ def send_email_with_html_body(subjet: str, receivers: list, template: str, conte
     except Exception as e:
         logger.error(e)
     return False
+
+
+
+
+def Car_Id(longueur):
+    caracteres = string.ascii_letters + string.digits + string.punctuation
+    chaine_aleatoire = ''.join(random.choice(caracteres) for _ in range(longueur))
+    return chaine_aleatoire
+
+# Exemple d'utilisation avec une chaîne de longueur 12
+chaine_resultat = Car_Id(12)
+print(chaine_resultat)

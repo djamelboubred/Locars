@@ -76,46 +76,8 @@ class Car(models.Model):
         ('B', 'Manuelle'),
     }
 
-    marque = models.CharField(max_length=50, default='')
-    model = models.CharField(max_length=50, default='')
-    year = models.PositiveIntegerField(default='')
-    km = models.IntegerField(default=0, blank=True)
+    Id_car = models.CharField(max_length=8, unique=True)
     licence_plate = models.CharField(max_length=20, unique=True)
-    nb_door = models.IntegerField(default=0, blank=True, null=True)
-
-    #adresse du Véhicule
-    country = models.CharField(max_length=42, blank=False)
-    city = models.CharField(max_length=58, blank=False)
-    street = models.CharField(max_length=50, blank=False)
-
-    # Déclaration de la clé étrangère vers le modèle User
-    username = models.ForeignKey(User, on_delete=models.CASCADE, default='')
-
-    fuel = models.CharField(max_length=1, choices=FUEL_CHOICES, blank=False)
-    
-    geardbox = models.CharField(max_length=1, choices=GEARDBOX, blank=True, null=True)
-    
-    
-    def __str__(self):
-        return self.licence_plate
-
-
-class Cars(models.Model):
-    
-    FUEL_CHOICES = (
-        ('A', 'Essence'),
-        ('B', 'Diesel'),
-        ('C', 'Hybride'),
-        ('D', 'Électrique'),
-    )
-
-    GEARDBOX = {
-        ('A', 'Automatique'),
-        ('B', 'Manuelle'),
-    }
-
-    
-    licences_plate = models.CharField(max_length=20, unique=True)
 
     marque = models.CharField(max_length=50, default='')
     model = models.CharField(max_length=50, default='')
@@ -136,14 +98,23 @@ class Cars(models.Model):
     #Informations complémentaire
     nb_door = models.IntegerField(default=0, blank=True, null=True)
     geardbox = models.CharField(max_length=1, choices=GEARDBOX, blank=True, null=True)
-    profilePicture = models.ImageField(upload_to='cars_picture/',
+    nb_place = models.IntegerField(default=0, blank=True, null=True)
+
+
+    ProfileCarPicture = models.ImageField(upload_to='cars_picture/',
                             default='profile_picture/default_images/cars.png')
+    Picture1 = models.ImageField(upload_to='cars_picture/',
+                            blank=True)
+    Picture2 = models.ImageField(upload_to='cars_picture/',
+                            blank=True)
+    Picture3 = models.ImageField(upload_to='cars_picture/',
+                            blank=True)
 
     # Déclaration de la clé étrangère vers le modèle User
-    username = models.ForeignKey(User, on_delete=models.CASCADE, related_name='cars',default='')
+    username = models.ForeignKey(User, on_delete=models.CASCADE, related_name='car',default='')
 
     def __str__(self):
-        return self.licences_plate
+        return self.Id_car
 
 """class User(AbstractUser):
     HOST = 'HOST'

@@ -3,11 +3,22 @@
 {% block content %}
     <div class="LocaristPage">
         <div id="Locarist">
-            <h2> Bonjour {{ user.username }} bienvenue sur Votre Futur Page de gestion de vos véhicules</h2>
+            {% if user.locarist %}
 
-            <h3>Nous allons enregistrer votre premier véhicules ensemble.</h3>
+                <h2> Bonjour Locarist </h2>
+                
+                <h3>Ajouter une Voiture</h3>
+
+            {% else %}
+                
+                <h2> Bonjour {{ user.username }} bienvenue sur Votre Futur Page de gestion de vos véhicules</h2>
+
+                <h3>Nous allons enregistrer votre premier véhicules ensemble.</h3>
+
+            
+            
+            {% endif %}
         </div>
-
         <div id="FormLocarist">
             <form method="post" action="">
                 {% csrf_token %}
@@ -23,8 +34,8 @@
                 <label for="year">Année :</label>
                 <input type="text" id="year" name="year">
                 <br>
-                <label for="licences_plate">Plaque d'Immatriculation :</label>
-                <input type="text" id="licences_plate" name="licences_plate">
+                <label for="licence_plate">Plaque d'Immatriculation :</label>
+                <input type="text" id="licence_plate" name="licence_plate">
                 <br>
                 
                        <label for="km">Compteur Kilométrique :</label>

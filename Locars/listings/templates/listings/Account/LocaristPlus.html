@@ -1,0 +1,66 @@
+{% extends 'listings/BaseProfile.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="LocaristPage">
+        <div id="Locarist">
+            {% if user.locarist %}
+
+                <h2> Bonjour Locarist </h2>
+                
+                <h3>Ajouter une Voiture</h3>
+
+            {% else %}
+                
+                <h2> Bonjour {{ user.username }} bienvenue sur Votre Futur Page de gestion de vos véhicules</h2>
+
+                <h3>Nous allons enregistrer votre premier véhicules ensemble.</h3>
+
+            
+            
+            {% endif %}
+        </div>
+
+        <div id="FormLocarist">
+            <form method="post" action="">
+                {% csrf_token %}
+
+                <label for="nb_door">Nombre de Porte</label>
+                <input type="number" id="nb_door" name="nb_door">
+            
+                <br>
+
+                <label>Boîte de Vitesse :</label>
+                <div id="DisplayFlexDirectionColumns">
+                    <input type="radio" name="geardbox" value="A" {% if selected_geardbox_type == 'A' %}checked{% endif %}> Automatique
+                    <input type="radio" name="geardbox" value="B" {% if selected_geardbox_type == 'B' %}checked{% endif %}> Manuelle
+                </div>
+                <br>
+
+                    <label for="nb_place">Nombre de Place :</label>
+                    <br>
+                    <input type="number" id="nb_place" name="nb_place">
+                    <br>
+                    <br>
+                    <label for="ProfileCarPicture">Upload :</label>
+                    <input type="file" id="ProfileCarPicture" name="ProfileCarPicture">
+                    <label for="Picture1">Upload :</label>
+                    <input type="file" id="Picture1" name="Picture1">
+                    <label for="Picture2">Upload :</label>
+                    <input type="file" id="Picture2" name="Picture2">
+                    <label for="Picture3">Upload :</label>
+                    <input type="file" id="Picture3" name="Picture3">
+
+                <br>
+                <br>
+
+
+            
+
+                <button type="submit" class="btn custom-button">Sauvegarder</button>
+            </form>
+        
+
+    </div>
+
+{% endblock %}

@@ -367,3 +367,12 @@ input {
     /* Ne concerne seulement la balise <h1> */
     text-align: center;
 }
+
+
+/* Mycars Page */
+
+.box-cars {
+    border: 1px solid black;
+    border-radius: 5px;
+    display: inline-block;
+}

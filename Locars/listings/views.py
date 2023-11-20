@@ -7,11 +7,12 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.urls import reverse
 from django.core.mail import send_mail
-from .forms import UserForm, ProfilForm, AccountForm, EmailForm, CarForm, CarTestForm
-from .models import User, Cars
+from .forms import UserForm, ProfilForm, AccountForm, EmailForm, CarForm, CarPlusForm
+from .models import User, Car
 from django.utils import timezone 
 from datetime import datetime
 #from .utils import send_email_with_html_body
+from .utils import Car_Id
 from django.conf import settings
 import smtplib
 from email.mime.text import MIMEText
@@ -52,7 +53,7 @@ def Register(request):
         else:
             messages.error(request, 'Veuillez corriger les erreurs dans le formulaire.')
 
-    return render(request, 'listings/Register.html')
+    return render(request, 'listings/Sign/Register.html')
 
 def Login(request):
     if request.user.is_authenticated:
@@ -69,7 +70,7 @@ def Login(request):
             else:
                 messages.error(request, 'Mauvaise authentification')
                 return redirect('Login')
-    return render(request, 'listings/Login.html')
+    return render(request, 'listings/Sign/Login.html')
 
 def Logout(request):
     logout(request)
@@ -94,7 +95,7 @@ def Profile(request: HttpRequest):
     else:
         form = ProfilForm(instance=request.user)
 
-    return render(request, 'listings/Profile.html', {'form': form})
+    return render(request, 'listings/Account/Profile.html', {'form': form})
 
 
 @login_required
@@ -123,7 +124,7 @@ def Account(request: HttpRequest):
             return redirect('Account')  # Redirigez l'utilisateur vers une autre page après la modification
     else:
         form = ProfilForm(instance=request.user)
-    return render(request, 'listings/Account.html')
+    return render(request, 'listings/Account/Account.html')
 
 
 
@@ -166,13 +167,13 @@ def DeleteAccount(request: HttpRequest):
         logout(request)
         # Rediriger vers une page d'accueil ou une page appropriée
         return redirect('AccountDeleted')
-    return render(request, 'listings/DeleteAccount.html')
+    return render(request, 'listings/Account/DeleteAccount.html')
 
 def AccountDeleted(request: HttpRequest):
     """
     Auto fresh page in 3 seconds redirect in home page
     """
-    return render(request, 'listings/AccountDelete.html')
+    return render(request, 'listings/Account/AccountDelete.html')
 
 @login_required   
 def Locarist(request: HttpRequest):
@@ -184,17 +185,24 @@ def Locarist(request: HttpRequest):
     :param request: HttpRequest: Pass the request from the server to the function
     :return: The Locarist
     """
-    form = CarTestForm(request.POST)
+    form = CarForm(request.POST)
 
 
     # Vérifiez si le formulaire est valide
     if form.is_valid():
-
+        Length_Car_Id = 8
 
         # Récupérez l'utilisateur actuellement connecté
         username = request.user
 
-        licences_plate = form.cleaned_data['licences_plate']
+        # Créer et Vérifie que la clé primaire est unique
+        ID = True
+        while ID == True:
+            Id_car = Car_Id(Length_Car_Id)
+            if not Car.objects.filter(Id_car=Id_car).exists():
+                ID = False
+        
+        licence_plate = form.cleaned_data['licence_plate']
 
         marque = form.cleaned_data['marque']
         model = form.cleaned_data['model']
@@ -207,11 +215,11 @@ def Locarist(request: HttpRequest):
 
         fuel = form.cleaned_data['fuel']
 
-        car = Cars.objects.create(username=username)
+        car = Car.objects.create(username=username)
 
 
-
-        car.licences_plate = licences_plate
+        car.Id_car = Id_car
+        car.licence_plate = licence_plate
         car.username = username
         car.marque = marque
         car.model = model
@@ -223,11 +231,14 @@ def Locarist(request: HttpRequest):
         car.fuel = fuel
         car.save()
 
-        ## Après avoir créé l'objet Cars, récupérez son ID unique
-        car_id = car.licences_plate 
+        request.user.locarist = True
+        request.user.save()
+        
+        ## Après avoir créé l'objet Car, récupérez son ID unique
+        Id_car = car.Id_car
 
         ## Construisez l'URL de la vue de modification en utilisant l'ID de la voiture
-        modification_url = reverse('LocaristPlus', kwargs={'voiture_id': car_id})
+        modification_url = reverse('LocaristPlus', kwargs={'car_id': Id_car})
 
         ## Redirigez l'utilisateur vers la vue de modification
         return redirect(modification_url)
@@ -235,38 +246,30 @@ def Locarist(request: HttpRequest):
     else:
         print(f"Form errors: {form.errors}")
 
-    return render(request, 'listings/Locarist.html')
+    return render(request, 'listings/Account/Locarist.html')
 
 @login_required
-def LocaristPlus(request: HttpRequest, voiture_id):
+def LocaristPlus(request: HttpRequest, car_id):
+    
+    car = Car.objects.get(Id_car=car_id)
+    form = CarPlusForm(request.POST)
+
+    if form.is_valid():
+        
+        car.nb_door = form.cleaned_data['nb_door']
+        car.geardbox = form.cleaned_data['geardbox']
+        car.nb_place = form.cleaned_data['nb_place']
+        car.ProfileCarPicture = form.cleaned_data['ProfileCarPicture']
+        car.Picture1 = form.cleaned_data['Picture1']
+        car.Picture2 = form.cleaned_data['Picture2']
+        car.Picture3 = form.cleaned_data['Picture3']
+
+        car.save()
+
+        return redirect('MyCars')
     # Récupérez l'objet Cars à modifier ou renvoyez une erreur 404 s'il n'existe pas
     #voiture = get_object_or_404(Cars, pk=voiture_id)
-    print(f"Voiture id : {voiture_id}")
-    return render(request, 'listings/Favories.html')
-
-@login_required
-def Favories(request: HttpRequest):
-    """
-    The Profile function renders the Favories page of the Locars website.
-    
-    - show favories of user
-
-    :param request: HttpRequest: Pass the request from the server to the function
-    :return: The Profile
-    """
-    return render(request, 'listings/Favories.html')
-
-@login_required
-def Travel(request: HttpRequest):
-    """
-    The Profile function renders the Travel page of the Locars website.
-    
-    - show travel of user
-    
-    :param request: HttpRequest: Pass the request from the server to the function
-    :return: The Profile
-    """
-    return render(request, 'listings/Travel.html')
+    return render(request, 'listings/Account/LocaristPlus.html')
 
 @login_required
 def MyCars(request: HttpRequest):
@@ -278,7 +281,34 @@ def MyCars(request: HttpRequest):
     :param request: HttpRequest: Pass the request from the server to the function
     :return: The MyCars
     """
-    return render(request, 'listings/Mycars.html')
+    cars = Car.objects.filter(username=request.user)
+    print(cars)
+    print(request.user)
+    return render(request, 'listings/Account/MyCars.html', {'cars': cars})
+
+@login_required
+def Favories(request: HttpRequest):
+    """
+    The Profile function renders the Favories page of the Locars website.
+    
+    - show favories of user
+
+    :param request: HttpRequest: Pass the request from the server to the function
+    :return: The Profile
+    """
+    return render(request, 'listings/Account/Favories.html')
+
+@login_required
+def Travel(request: HttpRequest):
+    """
+    The Profile function renders the Travel page of the Locars website.
+    
+    - show travel of user
+    
+    :param request: HttpRequest: Pass the request from the server to the function
+    :return: The Profile
+    """
+    return render(request, 'listings/Account/Travel.html')
 
 def Contact(request : HttpRequest):
     return render(request, 'listings/Contact.html')
