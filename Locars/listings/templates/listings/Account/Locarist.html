@@ -24,7 +24,7 @@
                 {% csrf_token %}
                 <div id="DisplayFlexDirectionColumns">
                     <label for="marque">Marque</label>
-                    <input type="text" id="marque" name="marque" required>
+                    <input type="text" id="marque" name="marque" value="{{ car.marque }}" required>
                     <br>
                     <label for="model">Modèle :</label>
                     <input type="text" id="model" name="model">

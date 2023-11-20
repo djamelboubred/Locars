@@ -17,7 +17,7 @@ class CarForm(forms.ModelForm):
 class CarPlusForm(forms.ModelForm):
     class Meta:
         model = Car
-        fields = ['nb_door', 'nb_place', 'geardbox', 'ProfileCarPicture', 'Picture1', 'Picture2', 'Picture3']
+        fields = ['nb_door', 'nb_place', 'geardbox', 'Price', 'ProfileCarPicture', 'Picture1', 'Picture2', 'Picture3']
 
 class ProfilForm(forms.ModelForm):
     class Meta:

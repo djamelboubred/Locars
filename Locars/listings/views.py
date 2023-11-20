@@ -175,6 +175,15 @@ def AccountDeleted(request: HttpRequest):
     """
     return render(request, 'listings/Account/AccountDelete.html')
 
+@login_required
+def DeleteCar(request, car_id):
+    if request.method == 'POST':
+
+        car = get_object_or_404(Car, Id_car=car_id, username=request.user)
+        car.delete()
+        return redirect('MyCars')
+    return render(request, 'listings/Account/DeleteCar.html')
+
 @login_required   
 def Locarist(request: HttpRequest):
     """
@@ -185,90 +194,93 @@ def Locarist(request: HttpRequest):
     :param request: HttpRequest: Pass the request from the server to the function
     :return: The Locarist
     """
-    form = CarForm(request.POST)
+    if request.method == 'POST':
+        form = CarForm(request.POST)
 
 
-    # Vérifiez si le formulaire est valide
-    if form.is_valid():
-        Length_Car_Id = 8
+        # Vérifiez si le formulaire est valide
+        if form.is_valid():
+            Length_Car_Id = 8
 
-        # Récupérez l'utilisateur actuellement connecté
-        username = request.user
+            # Récupérez l'utilisateur actuellement connecté
+            username = request.user
 
-        # Créer et Vérifie que la clé primaire est unique
-        ID = True
-        while ID == True:
-            Id_car = Car_Id(Length_Car_Id)
-            if not Car.objects.filter(Id_car=Id_car).exists():
-                ID = False
-        
-        licence_plate = form.cleaned_data['licence_plate']
+            # Créer et Vérifie que la clé primaire est unique
+            ID = True
+            while ID == True:
+                Id_car = Car_Id(Length_Car_Id)
+                if not Car.objects.filter(Id_car=Id_car).exists():
+                    ID = False
 
-        marque = form.cleaned_data['marque']
-        model = form.cleaned_data['model']
-        year = form.cleaned_data['year']
-        km = form.cleaned_data['km']
+            licence_plate = form.cleaned_data['licence_plate']
 
-        country = form.cleaned_data['country']
-        city = form.cleaned_data['city']
-        street = form.cleaned_data['street']
+            marque = form.cleaned_data['marque']
+            model = form.cleaned_data['model']
+            year = form.cleaned_data['year']
+            km = form.cleaned_data['km']
 
-        fuel = form.cleaned_data['fuel']
+            country = form.cleaned_data['country']
+            city = form.cleaned_data['city']
+            street = form.cleaned_data['street']
 
-        car = Car.objects.create(username=username)
+            fuel = form.cleaned_data['fuel']
+
+            car = Car.objects.create(username=username)
 
 
-        car.Id_car = Id_car
-        car.licence_plate = licence_plate
-        car.username = username
-        car.marque = marque
-        car.model = model
-        car.year = year
-        car.km = km
-        car.country = country
-        car.city = city
-        car.street = street
-        car.fuel = fuel
-        car.save()
+            car.Id_car = Id_car
+            car.licence_plate = licence_plate
+            car.username = username
+            car.marque = marque
+            car.model = model
+            car.year = year
+            car.km = km
+            car.country = country
+            car.city = city
+            car.street = street
+            car.fuel = fuel
+            car.save()
 
-        request.user.locarist = True
-        request.user.save()
-        
-        ## Après avoir créé l'objet Car, récupérez son ID unique
-        Id_car = car.Id_car
+            request.user.locarist = True
+            request.user.save()
 
-        ## Construisez l'URL de la vue de modification en utilisant l'ID de la voiture
-        modification_url = reverse('LocaristPlus', kwargs={'car_id': Id_car})
+            ## Après avoir créé l'objet Car, récupérez son ID unique
+            Id_car = car.Id_car
 
-        ## Redirigez l'utilisateur vers la vue de modification
-        return redirect(modification_url)
+            ## Construisez l'URL de la vue de modification en utilisant l'ID de la voiture
+            modification_url = reverse('LocaristPlus', kwargs={'car_id': Id_car})
+
+            ## Redirigez l'utilisateur vers la vue de modification
+            return redirect(modification_url)
         #return redirect('LocaristPlus')
-    else:
-        print(f"Form errors: {form.errors}")
+        else:
+            print(f"Form errors: {form.errors}")
 
     return render(request, 'listings/Account/Locarist.html')
 
 @login_required
 def LocaristPlus(request: HttpRequest, car_id):
-    
-    car = Car.objects.get(Id_car=car_id)
-    form = CarPlusForm(request.POST)
+    if request.method == 'POST':
+        car = Car.objects.get(Id_car=car_id)
+        form = CarPlusForm(request.POST)
 
-    if form.is_valid():
-        
-        car.nb_door = form.cleaned_data['nb_door']
-        car.geardbox = form.cleaned_data['geardbox']
-        car.nb_place = form.cleaned_data['nb_place']
-        car.ProfileCarPicture = form.cleaned_data['ProfileCarPicture']
-        car.Picture1 = form.cleaned_data['Picture1']
-        car.Picture2 = form.cleaned_data['Picture2']
-        car.Picture3 = form.cleaned_data['Picture3']
+        if form.is_valid():
 
-        car.save()
+            car.nb_door = form.cleaned_data['nb_door']
+            car.geardbox = form.cleaned_data['geardbox']
+            car.nb_place = form.cleaned_data['nb_place']
+            car.Price = form.cleaned_data['Price']
 
-        return redirect('MyCars')
-    # Récupérez l'objet Cars à modifier ou renvoyez une erreur 404 s'il n'existe pas
-    #voiture = get_object_or_404(Cars, pk=voiture_id)
+            car.ProfileCarPicture = form.cleaned_data['ProfileCarPicture']
+            car.Picture1 = form.cleaned_data['Picture1']
+            car.Picture2 = form.cleaned_data['Picture2']
+            car.Picture3 = form.cleaned_data['Picture3']
+
+            car.save()
+
+            return redirect('MyCars')
+        # Récupérez l'objet Cars à modifier ou renvoyez une erreur 404 s'il n'existe pas
+        #voiture = get_object_or_404(Cars, pk=voiture_id)
     return render(request, 'listings/Account/LocaristPlus.html')
 
 @login_required

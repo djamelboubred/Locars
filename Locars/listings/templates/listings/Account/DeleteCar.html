@@ -1,0 +1,22 @@
+{% extends 'listings/BaseProfile.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="DeleteAccountPage">
+        
+        <h2>Supprimer la Voiture</h2>
+        <p>Êtes-vous sûr de vouloir supprimer votre voiture ?</p>
+
+        <form method="post" action="">
+            {% csrf_token %}
+            <button type="submit" class="BtnDeletedAccount" onmouseover="activerBouton()">Supprimer la voiture</button>
+            <a href="{% url 'MyCars' %}">
+                <button type="button" class="BtnDeletedAccountExit">
+                    Annuler
+                </button>
+            </a>
+
+        </form>
+    </div>
+
+{% endblock %}

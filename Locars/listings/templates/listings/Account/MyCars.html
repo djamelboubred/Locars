@@ -7,25 +7,67 @@
             <h1>Mes Voitures</h1>
             {% for car in cars %}
                 <div class = 'box-cars'>
-                    <strong>{{ car.marque }} {{ car.model }} ({{ car.year }})</strong><br>
-                    ID de voiture: {{ car.Id_car }}<br>
-                    Plaque d'immatriculation: {{ car.licence_plate }}<br>
-                    Carburant: {{ car.get_fuel_display }}<br>
-                    Boîte de vitesse: {{ car.get_geardbox_display }}<br>
-                    <button class="btn btn-secondary">
-                        <a href="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-down" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M3.646 4.146a.5.5 0 0 1 .708 0L8 7.793l3.646-3.647a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 0-.708zM1 11.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5z"/>
-                            </svg>
-                            Détails
-                        </a>
-                    </button>
+                    <img src="{{ car.ProfileCarPicture.url }}" class="image-ronde">
+                    
+                    <br>
+                    
+                    <strong>{{ car.marque }} {{ car.model }} ({{ car.year }}Km)</strong>
+                    {{ car.Price }}€
+                    
+                    <br>
+                    <a href="{% url 'Locarist' %}">
+                        <button class="btn btn-success">
+                            Modifier
+                        </button>
+                    </a>
+                    <div class="dropdown">
+                        <button onclick="toggleDropdown()" class="btn btn-secondary">Détails</button>
+                    
+                        <div id="myDropdown" class="dropdown-content">
+                            ID de voiture: {{ car.Id_car }}<br>
+                            Plaque d'immatriculation: {{ car.licence_plate }}<br>
+                            Carburant: {{ car.get_fuel_display }}<br>
+                            Boîte de vitesse: {{ car.get_geardbox_display }}<br>
+                        </div>
+
+                    </div>
+                    
+                    <a href="{% url 'DeleteCar' car_id=car.Id_car %}">
+                        <button class="btn btn-danger">
+                            Supprimer
+                        </button>
+                    </a>
                 </div>
+                
 
             {% endfor %}
             <a href="{% url 'Locarist' %}"><button class="btn btn-success">Ajouter une Voiture</button></a>
         </div>
-        
+
     </div>
+    <script>
+        // Fonction pour afficher ou masquer le menu déroulant
+        function toggleDropdown() {
+            var dropdown = document.getElementById("myDropdown");
+            if (dropdown.style.display === "block") {
+                dropdown.style.display = "none";
+            } else {
+                dropdown.style.display = "block";
+            }
+        }
+    
+        // Fermer le menu déroulant si l'utilisateur clique en dehors de celui-ci
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropdown button')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === "block") {
+                        openDropdown.style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
 
 {% endblock %}

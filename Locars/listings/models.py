@@ -99,7 +99,7 @@ class Car(models.Model):
     nb_door = models.IntegerField(default=0, blank=True, null=True)
     geardbox = models.CharField(max_length=1, choices=GEARDBOX, blank=True, null=True)
     nb_place = models.IntegerField(default=0, blank=True, null=True)
-
+    Price = models.IntegerField(default=0)
 
     ProfileCarPicture = models.ImageField(upload_to='cars_picture/',
                             default='profile_picture/default_images/cars.png')

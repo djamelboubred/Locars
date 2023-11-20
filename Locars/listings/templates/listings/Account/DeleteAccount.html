@@ -10,7 +10,11 @@
             <form method="post" action="">
                 {% csrf_token %}
                 <button type="submit" class="BtnDeletedAccount" onmouseover="activerBouton()">Supprimer le compte</button>
-                <button type="button" class="BtnDeletedAccountExit"><a href="{% url 'Account' %}">Annuler</a></button>
+                <a href="{% url 'Account' %}">
+                    <button type="button" class="BtnDeletedAccountExit">
+                        Annuler
+                    </button>
+                </a>
             </form>
     </div>
 
