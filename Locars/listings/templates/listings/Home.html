@@ -4,13 +4,13 @@
 
 
 {% if user.is_authenticated %}
-<h3> Bonjour {{ user.username }} bienvenu sur Locars</h3>
+<h3> Bonjour {{ user.username }} bienvenue sur Locars</h3>
 voici votre numéro de téléphone {{ user.phone_no }}
 <br>
 {{ user.first_name }}
 <br>
 {{ user.last_name }}
-<button type="submit"><a href="logout">Déconnection</a></button>
+<button type="submit"><a href="{% url 'Logout' %}">Déconnexion</a></button>
 {% else %}
 <button type="submit"><a href="{% url 'Register' %}">S'enregistrer</a></button>
 <button type="submit"><a href="{% url 'Login' %}">se connecter</a></button>
