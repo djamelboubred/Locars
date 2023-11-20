@@ -12,7 +12,7 @@ voici votre numéro de téléphone {{ user.phone_no }}
 {{ user.last_name }}
 <button type="submit"><a href="logout">Déconnection</a></button>
 {% else %}
-<button type="submit"><a href="register">S'enregistrer</a></button>
+<button type="submit"><a href="{% url 'Register' %}">S'enregistrer</a></button>
 <button type="submit"><a href="{% url 'Login' %}">se connecter</a></button>
 {% endif %}
 

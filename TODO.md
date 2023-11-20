@@ -15,6 +15,7 @@
                     - [X] Logout -> Djams
                 - [X] Profile
                     - [X] Shows profile picture
+                        - [ ] Dell profile Picture
                     - [X] Modify information 
                         - [X] First Name
                         - [X] Last Name
