@@ -31,13 +31,18 @@
                             - [ ] RIB ?
                     - [ ] Locarist
                         - [ ] First cars
+                            - [ ] Id_Car for keys identification
                             - [ ] Adress
                             - [ ] Immatriculate (vérification des plaques d'immatriculation dans la mise à jour 1.2)
                             - [ ] Manual/automate
-                        - [ ] Add cars
-                            - [ ] Adress
-                            - [ ] Immatriculate
-                            - [ ] Manual/automate
+                        - [X] Add cars
+                            - [X] Adress
+                            - [X] Immatriculate
+                            - [X] Manual/automate
+                        - [ ] MyCars
+                            - [ ] Add cars
+                            - [ ] Details Cars
+                            - [ ] Dell cars
                     - [ ] Favories
                     - [ ] Travel
                     - [ ] Became Locarist
