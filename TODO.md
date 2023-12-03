@@ -5,7 +5,7 @@
 - [ ] HTML structure
     - [ ] Base -> DJAMS
         - [ ] Became Host
-        - [ ] NavBar
+        - [X] NavBar
             - [X] Structure
             - [X] Function click
             - [ ] Icons
@@ -61,6 +61,17 @@
             - [ ] Vehicule type
             - [ ] About
     - [ ] Home
+        - [ ] Search function -> Djams
+            - [ ] Vehicule type
+            - [X] Marque
+            - [X] models
+
+-------
+Note
+
+Ajouter une liste de pays dans le monde en soit au début canada et france pour ajouter une voiture/modifier/rechercher
+
+-------
     - [X] Login -> Djams
     - [X] Register -> Djams
     - [ ] Help -> FEFE
