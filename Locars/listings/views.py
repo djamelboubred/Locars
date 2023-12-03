@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.urls import reverse
 from django.core.mail import send_mail
-from .forms import UserForm, ProfilForm, AccountForm, EmailForm, CarForm, CarPlusForm
+from .forms import UserForm, ProfilForm, AccountForm, EmailForm, CarForm, CarPlusForm, SearchCarsForm
 from .models import User, Car
 from django.utils import timezone 
 from datetime import datetime
@@ -24,7 +24,36 @@ from django.core.exceptions import ObjectDoesNotExist
 
 
 def Home(request: HttpRequest):
+    if request.method == "POST":
+        form = SearchCarsForm(request.POST)
+
+        if form.is_valid():
+            cars=Car.objects.all()
+
+            marque = form.cleaned_data['marque']
+            if marque != '':
+                cars = cars.filter(marque=marque)
+            model = form.cleaned_data.get('model','')
+            if model != '':
+                cars = cars.filter(model=model)
+            city = form.cleaned_data.get('city','')
+            if city != '':
+                cars = cars.filter(city=city)
+            country = form.cleaned_data.get('country','')
+            if country != '':
+                cars = cars.filter(country=country)
+            
+            print(marque)
+            print(model)
+            print(city)
+            print(country)
+            #print(car)
+            return render(request, 'listings/Search.html', {'cars': cars})      
+
     return render(request, 'listings/Home.html')
+
+def Search(request: HttpRequest):
+    return render(request, 'listings/Search.html')
 
 def Register(request):
     if request.method == "POST":

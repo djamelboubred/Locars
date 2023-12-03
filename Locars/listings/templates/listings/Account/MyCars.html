@@ -5,6 +5,10 @@
     <div class="LocaristPage">
         <div id="Locarist">
             <h1>Mes Voitures</h1>
+            <h1>
+                <a href="{% url 'Locarist' %}"><button class="btn btn-success">Ajouter une Voiture</button></a>
+            </h1>
+
             {% for car in cars %}
                 <div class = 'box-cars'>
                     <img src="{{ car.ProfileCarPicture.url }}" class="image-ronde">
@@ -41,7 +45,7 @@
                 
 
             {% endfor %}
-            <a href="{% url 'Locarist' %}"><button class="btn btn-success">Ajouter une Voiture</button></a>
+            
         </div>
 
     </div>

@@ -33,3 +33,8 @@ class AccountForm(forms.ModelForm):
 class EmailForm(forms.Form):
     to_email = forms.EmailField(label='Destinataire')
 
+class SearchCarsForm(forms.Form):
+    marque = forms.CharField(max_length=20, required=False)
+    model = forms.CharField(max_length=20, required=False)
+    city = forms.CharField(max_length=58, required=False)
+    country = forms.CharField(max_length=42, required=False)

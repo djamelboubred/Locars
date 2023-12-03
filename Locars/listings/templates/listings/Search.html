@@ -1,0 +1,48 @@
+{% extends 'Base.html' %}
+{% load static %}
+{% block content %}
+
+{% for car in cars %}
+    <div class = 'box-cars'>
+        <img src="{{ car.ProfileCarPicture.url }}" class="image-ronde">
+
+        <br>
+
+        <strong>{{ car.marque }} {{ car.model }} ({{ car.year }}Km)</strong>
+        {{ car.Price }}€
+
+        <br>
+    </div>
+{% endfor %}
+<form method="post" action="">
+    {% csrf_token %}
+    <button type="submit">Filtrer</button>
+</form>
+
+
+<script>
+    // Fonction pour afficher ou masquer le menu déroulant
+    function toggleDropdown() {
+        var dropdown = document.getElementById("myDropdown");
+        if (dropdown.style.display === "block") {
+            dropdown.style.display = "none";
+        } else {
+            dropdown.style.display = "block";
+        }
+    }
+
+    // Fermer le menu déroulant si l'utilisateur clique en dehors de celui-ci
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropdown button')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            for (var i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.style.display === "block") {
+                    openDropdown.style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
+{% endblock %}
