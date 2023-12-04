@@ -43,16 +43,31 @@ def Home(request: HttpRequest):
             if country != '':
                 cars = cars.filter(country=country)
             
-            print(marque)
-            print(model)
-            print(city)
-            print(country)
-            #print(car)
             return render(request, 'listings/Search.html', {'cars': cars})      
 
     return render(request, 'listings/Home.html')
 
 def Search(request: HttpRequest):
+    if request.method == "POST":
+        form = SearchCarsForm(request.POST)
+
+        if form.is_valid():
+            cars=Car.objects.all()
+
+            marque = form.cleaned_data['marque']
+            if marque != '':
+                cars = cars.filter(marque=marque)
+            model = form.cleaned_data.get('model','')
+            if model != '':
+                cars = cars.filter(model=model)
+            city = form.cleaned_data.get('city','')
+            if city != '':
+                cars = cars.filter(city=city)
+            country = form.cleaned_data.get('country','')
+            if country != '':
+                cars = cars.filter(country=country)
+            
+            return render(request, 'listings/Search.html', {'cars': cars})
     return render(request, 'listings/Search.html')
 
 def Register(request):
